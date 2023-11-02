@@ -12,44 +12,6 @@ WanderLust is a travel journal app designed to enhance the user's experience and
 
 ### User Registration and Profile
 
-- User registration and account creation.
-- User profiles with personal information and profile pictures.
-
-### Trip Creation
-
-- Ability to create and name a new trip.
-- Add a cover photo or image for the trip.
-- Specify the trip's start and end dates.
-
-### Journal Entries
-
-- Create journal entries for each day or specific events during the trip.
-- Add text, photos, and geolocation to entries.
-- Edit and update journal entries.
-
-### Photo Gallery
-
-- Store and organize photos from the trip.
-- Add captions and tags to photos.
-- View photos in a gallery or grid layout.
-
-### Maps and Geolocation
-
-- Integrate maps to show the user's route and locations visited.
-- Automatically track and log the user's current location during the trip.
-
-### Searching of Trips
-
-- Easily search and locate past trips based on various parameters.
-
-### Sharing and Social Integration
-
-- Share journal entries or photos on social media platforms.
-
-## Features
-
-### User Registration and Profile
-
 - **User Registration**: Create your account and get started on your travel journey.
 - **User Profiles**: Personalize your profile with your information and profile picture.
 
@@ -101,12 +63,3 @@ This project utilizes the following technologies:
 1. Open the Wanderlust application.
 2. Perform the required action from the available features.
 3. Follow the prompts and instructions provided within the application.
-
-## Getting Started
-
-1. **Download WanderLust**: Install the WanderLust app from your preferred app store.
-2. **Register or Log In**: Create your account or log in if you already have one.
-3. **Create Your First Trip**: Start a new trip, give it a name, set a cover photo, and add the start and end dates.
-4. **Journal Your Adventures**: Add daily journal entries, photos, and geolocation data to document your experiences.
-5. **View Memories**: Relive your adventures in the gallery view, showcasing your photos.
-6. **Share Your Journey**: Share your favorite moments on social media and let others be a part of your adventure.
