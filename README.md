@@ -2,6 +2,13 @@
 
 WanderLust is a travel journal app designed to enhance the user's experience and effectively document their trips. It provides various features to help users create and organize their travel memories effortlessly.
 
+## Table of Contents
+- [Structure](#Structure)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#Installation)
+- [Usage](#usage)
+
 ## Features
 
 ### User Registration and Profile
@@ -40,30 +47,24 @@ WanderLust is a travel journal app designed to enhance the user's experience and
 
 - Share journal entries or photos on social media platforms.
 
-## Installation
-
-- Clone the repository.
-- Run `npm install` to install the necessary dependencies.
-- Run `npm start` to start the application.
 
 ## Technologies Used
 
-- Node.js
-- Express
-- React
-- MongoDB
+This project utilizes the following technologies:
 
-## Contributing
+- Programming Language: Swift
+- Database: CoreData
+- Frameworks: UIKIT
 
-Contributions are always welcome! Please feel free to fork the repository and submit pull requests.
+## Installation
+1. Clone the repository: `git clone https://github.com/irajwinder/Wanderlust.git`
+2. Open the project in Xcode.
+3. Build and run the project.
 
-## License
-
-This project is licensed under the [MIT](https://opensource.org/licenses/MIT) License.
-
-# WanderLust - Your Ultimate Travel Journal App
-
-WanderLust is your go-to travel journal app, designed to enhance your travel experience and help you document your adventures effectively. Whether you're an avid globetrotter or just planning your first trip, WanderLust has the features you need to create unforgettable travel memories.
+## Usage
+1. Open the Wanderlust application.
+2. Perform the required action from the available features.
+3. Follow the prompts and instructions provided within the application.
 
 ## Features
 
