@@ -13,7 +13,7 @@ struct WanderlustApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Register()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
