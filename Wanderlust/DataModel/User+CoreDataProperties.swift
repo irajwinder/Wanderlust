@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/2/23.
+//  Created by Rajwinder Singh on 11/3/23.
 //
 //
 
@@ -16,8 +16,11 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
-    @NSManaged public var userName: String?
+    @NSManaged public var userEmail: String?
     @NSManaged public var userPassword: String?
+    @NSManaged public var userFirstName: String?
+    @NSManaged public var userLastName: String?
+    @NSManaged public var userBio: String?
 
 }
 

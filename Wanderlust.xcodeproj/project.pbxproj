@@ -16,10 +16,12 @@
 		A2702D0D2AF3339B002CDAF7 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D0C2AF3339B002CDAF7 /* Register.swift */; };
 		A2702D122AF33DB9002CDAF7 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D112AF33DB9002CDAF7 /* UserProfile.swift */; };
 		A2702D1B2AF3AB3A002CDAF7 /* CustomComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D1A2AF3AB3A002CDAF7 /* CustomComponents.swift */; };
-		A2702D212AF3E979002CDAF7 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D1D2AF3E979002CDAF7 /* Item+CoreDataClass.swift */; };
-		A2702D222AF3E979002CDAF7 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D1E2AF3E979002CDAF7 /* Item+CoreDataProperties.swift */; };
-		A2702D232AF3E979002CDAF7 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D1F2AF3E979002CDAF7 /* User+CoreDataClass.swift */; };
-		A2702D242AF3E979002CDAF7 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D202AF3E979002CDAF7 /* User+CoreDataProperties.swift */; };
+		A2702D312AF52BDC002CDAF7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D302AF52BDC002CDAF7 /* DataManager.swift */; };
+		A2702D332AF52CE9002CDAF7 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D322AF52CE9002CDAF7 /* Validation.swift */; };
+		A2702D382AF52D24002CDAF7 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D342AF52D24002CDAF7 /* User+CoreDataClass.swift */; };
+		A2702D392AF52D24002CDAF7 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D352AF52D24002CDAF7 /* User+CoreDataProperties.swift */; };
+		A2702D3A2AF52D24002CDAF7 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D362AF52D24002CDAF7 /* Item+CoreDataClass.swift */; };
+		A2702D3B2AF52D24002CDAF7 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D372AF52D24002CDAF7 /* Item+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +36,12 @@
 		A2702D112AF33DB9002CDAF7 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		A2702D1A2AF3AB3A002CDAF7 /* CustomComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomComponents.swift; sourceTree = "<group>"; };
 		A2702D1C2AF3B306002CDAF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		A2702D1D2AF3E979002CDAF7 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A2702D1E2AF3E979002CDAF7 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A2702D1F2AF3E979002CDAF7 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A2702D202AF3E979002CDAF7 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A2702D302AF52BDC002CDAF7 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		A2702D322AF52CE9002CDAF7 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		A2702D342AF52D24002CDAF7 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A2702D352AF52D24002CDAF7 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A2702D362AF52D24002CDAF7 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A2702D372AF52D24002CDAF7 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 				A2702D162AF33E64002CDAF7 /* Journal */,
 				A2702D132AF33DF7002CDAF7 /* Trip */,
 				A2702D252AF3E982002CDAF7 /* Utility */,
+				A2702CF52AF3200D002CDAF7 /* WanderlustApp.swift */,
 				A2702CF72AF3200D002CDAF7 /* ContentView.swift */,
 				A2702CF92AF3200F002CDAF7 /* Assets.xcassets */,
 				A2702CFE2AF3200F002CDAF7 /* Persistence.swift */,
@@ -137,7 +142,7 @@
 		A2702D252AF3E982002CDAF7 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A2702CF52AF3200D002CDAF7 /* WanderlustApp.swift */,
+				A2702D322AF52CE9002CDAF7 /* Validation.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 		A2702D262AF3E993002CDAF7 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				A2702D302AF52BDC002CDAF7 /* DataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -152,10 +158,10 @@
 		A2702D272AF3E9D4002CDAF7 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				A2702D1D2AF3E979002CDAF7 /* Item+CoreDataClass.swift */,
-				A2702D1E2AF3E979002CDAF7 /* Item+CoreDataProperties.swift */,
-				A2702D1F2AF3E979002CDAF7 /* User+CoreDataClass.swift */,
-				A2702D202AF3E979002CDAF7 /* User+CoreDataProperties.swift */,
+				A2702D342AF52D24002CDAF7 /* User+CoreDataClass.swift */,
+				A2702D352AF52D24002CDAF7 /* User+CoreDataProperties.swift */,
+				A2702D362AF52D24002CDAF7 /* Item+CoreDataClass.swift */,
+				A2702D372AF52D24002CDAF7 /* Item+CoreDataProperties.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -230,16 +236,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2702D312AF52BDC002CDAF7 /* DataManager.swift in Sources */,
 				A2702D1B2AF3AB3A002CDAF7 /* CustomComponents.swift in Sources */,
 				A2702D022AF3200F002CDAF7 /* Wanderlust.xcdatamodeld in Sources */,
+				A2702D332AF52CE9002CDAF7 /* Validation.swift in Sources */,
+				A2702D382AF52D24002CDAF7 /* User+CoreDataClass.swift in Sources */,
+				A2702D3B2AF52D24002CDAF7 /* Item+CoreDataProperties.swift in Sources */,
 				A2702CFF2AF3200F002CDAF7 /* Persistence.swift in Sources */,
+				A2702D3A2AF52D24002CDAF7 /* Item+CoreDataClass.swift in Sources */,
 				A2702D122AF33DB9002CDAF7 /* UserProfile.swift in Sources */,
-				A2702D232AF3E979002CDAF7 /* User+CoreDataClass.swift in Sources */,
+				A2702D392AF52D24002CDAF7 /* User+CoreDataProperties.swift in Sources */,
 				A2702CF82AF3200D002CDAF7 /* ContentView.swift in Sources */,
 				A2702CF62AF3200D002CDAF7 /* WanderlustApp.swift in Sources */,
-				A2702D242AF3E979002CDAF7 /* User+CoreDataProperties.swift in Sources */,
-				A2702D222AF3E979002CDAF7 /* Item+CoreDataProperties.swift in Sources */,
-				A2702D212AF3E979002CDAF7 /* Item+CoreDataClass.swift in Sources */,
 				A2702D0D2AF3339B002CDAF7 /* Register.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
