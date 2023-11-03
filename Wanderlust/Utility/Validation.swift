@@ -24,19 +24,19 @@ struct Validation {
     }
     
     static func isValidPassword(_ password: String?) -> Bool {
-            guard let password = password, !password.isEmpty else {
+            guard let password = password, password.count >= 8 else {
                 return false
             }
-            return password.count >= 8 //  minimum length as needed.
+            return true
         }
 
-    static func doPasswordsMatch(password: String?, confirmPassword: String?) -> Bool {
-        guard let password = password, let confirmPassword = confirmPassword else {
+    static func doPasswordsMatch(_ password: String?, _ confirmPassword: String?) -> Bool {
+        guard let password = password, let confirmPassword = confirmPassword, password == confirmPassword else {
             return false
         }
-        return password == confirmPassword
+        return true
     }
-    
+
     static func showAlert(on viewController: UIViewController, with title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
