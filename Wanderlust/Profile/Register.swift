@@ -41,16 +41,16 @@ struct Register: View {
 }
 
 struct LoginView: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                CustomTextField(placeholder: "Username", text: $username)
+                CustomTextField(placeholder: "Email", text: $email)
                     .padding()
                 
-                CustomTextField(placeholder: "Password", text: $password)
+                CustomSecureTextField(placeholder: "Password", text: $password)
                     .padding()
             }
         }.navigationTitle("Login")
@@ -58,20 +58,20 @@ struct LoginView: View {
 }
 
 struct RegisterView: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                CustomTextField(placeholder: "Username", text: $username)
+                CustomTextField(placeholder: "Email", text: $email)
                     .padding()
                 
-                CustomTextField(placeholder: "Password", text: $password)
+                CustomSecureTextField(placeholder: "Password", text: $password)
                     .padding()
                 
-                CustomTextField(placeholder: "Confirm Password", text: $confirmPassword)
+                CustomSecureTextField(placeholder: "Confirm Password", text: $confirmPassword)
                     .padding()
             }
         }.navigationTitle("Register")
