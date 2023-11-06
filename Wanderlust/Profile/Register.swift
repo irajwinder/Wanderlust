@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Register: View {
     @State private var selectedTab = 0 // 0 for Register, 1 for Login
+    @State private var isLoggedIn = false
 
     var body: some View {
         NavigationView {
@@ -31,10 +32,15 @@ struct Register: View {
                 } else {
                     LoginView().toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("Login", action: {})
+                            Button("Login", action: {
+                                isLoggedIn = true
+                            })
                         }
                     }
                 }
+            }
+            .fullScreenCover(isPresented: $isLoggedIn) {
+                TabBarView()
             }
         }
     }

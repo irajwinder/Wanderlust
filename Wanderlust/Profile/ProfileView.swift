@@ -1,5 +1,5 @@
 //
-//  UserProfile.swift
+//  ProfileView.swift
 //  Wanderlust
 //
 //  Created by Rajwinder Singh on 11/1/23.
@@ -7,14 +7,11 @@
 
 import SwiftUI
 
-struct UserProfile: View {
-    @State private var firstName: String = ""
-    @State private var lastName: String = ""
+struct ProfileView: View {
+    @State private var userName: String = ""
     @State private var email: String = ""
-    @State private var bio: String = ""
     @State private var profilePicture: UIImage? = UIImage(named: "logo")
     
-
     var body: some View {
         NavigationView {
             VStack {
@@ -27,20 +24,16 @@ struct UserProfile: View {
                 }
                 Form {
                     Section(header: Text("Personal Information")) {
-                        CustomText(text: "First Name", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "First Name", text: $firstName)
-                            .padding()
-                        
-                        CustomText(text: "Last Name", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "Last Name", text: $lastName)
+                        CustomText(text: "Name", textSize: 20, textColor: .black)
+                        CustomTextField(placeholder: "Full Name", text: $userName)
                             .padding()
                         
                         CustomText(text: "Email", textSize: 20, textColor: .black)
                         CustomTextField(placeholder: "Email", text: $email)
                             .padding()
                         
-                        CustomText(text: "Bio", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "Bio", text: $bio)
+                        CustomText(text: "Date of Birth", textSize: 20, textColor: .black)
+                        CustomDatePicker()
                             .padding()
                     }
                 }
@@ -58,5 +51,5 @@ struct UserProfile: View {
 
 
 #Preview {
-    UserProfile()
+    ProfileView()
 }

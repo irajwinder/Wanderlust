@@ -57,6 +57,34 @@ struct CustomImage: View {
     }
 }
 
+struct CustomDatePicker: View {
+    @State private var selectedDate = Date()
+    var body: some View {
+        DatePicker("", selection: $selectedDate, displayedComponents: .date)
+            .datePickerStyle(.automatic)
+            .padding()
+    }
+}
+
+struct CustomCoverPhoto: View {
+    var coverPhoto: UIImage?
+    
+    var body: some View {
+        ZStack {
+            if let coverPhoto = coverPhoto {
+                Image(uiImage: coverPhoto)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 200, height: 200)
+                    .clipped()
+            } else {
+                Color.gray
+            }
+        }
+    }
+}
+
+
 #Preview {
     Group {
         CustomText(text: "Text", textSize: 20, textColor: .black)
@@ -69,5 +97,12 @@ struct CustomImage: View {
             .padding()
         
         CustomImage(profilePicture: UIImage(named: "logo"))
+            .padding()
+        
+        CustomDatePicker()
+            .padding()
+
+        CustomCoverPhoto(coverPhoto: UIImage(named: "logo"))
+
     }
 }
