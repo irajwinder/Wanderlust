@@ -16,14 +16,15 @@ extension Trip {
         return NSFetchRequest<Trip>(entityName: "Trip")
     }
 
-    @NSManaged public var tripName: String?
     @NSManaged public var tripCoverPhoto: Data?
-    @NSManaged public var tripStartDate: Date?
     @NSManaged public var tripEndDate: Date?
-    @NSManaged public var user: User?
+    @NSManaged public var tripName: String?
+    @NSManaged public var tripStartDate: Date?
+    @NSManaged public var tripLongitude: Double
+    @NSManaged public var tripLatitude: Double
     @NSManaged public var journal: NSSet?
     @NSManaged public var photo: NSSet?
-    @NSManaged public var location: NSSet?
+    @NSManaged public var user: User?
 
 }
 
@@ -58,23 +59,6 @@ extension Trip {
 
     @objc(removePhoto:)
     @NSManaged public func removeFromPhoto(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for location
-extension Trip {
-
-    @objc(addLocationObject:)
-    @NSManaged public func addToLocation(_ value: Location)
-
-    @objc(removeLocationObject:)
-    @NSManaged public func removeFromLocation(_ value: Location)
-
-    @objc(addLocation:)
-    @NSManaged public func addToLocation(_ values: NSSet)
-
-    @objc(removeLocation:)
-    @NSManaged public func removeFromLocation(_ values: NSSet)
 
 }
 

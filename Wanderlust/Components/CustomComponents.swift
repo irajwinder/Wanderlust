@@ -58,7 +58,8 @@ struct CustomImage: View {
 }
 
 struct CustomDatePicker: View {
-    @State private var selectedDate = Date()
+    @Binding var selectedDate: Date
+    
     var body: some View {
         DatePicker("", selection: $selectedDate, displayedComponents: .date)
             .datePickerStyle(.automatic)
@@ -99,8 +100,8 @@ struct CustomCoverPhoto: View {
         CustomImage(profilePicture: UIImage(named: "logo"))
             .padding()
         
-        CustomDatePicker()
-            .padding()
+        CustomDatePicker(selectedDate: .constant(Date()))
+                   .padding()
 
         CustomCoverPhoto(coverPhoto: UIImage(named: "logo"))
 

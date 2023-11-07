@@ -16,9 +16,9 @@ extension PhotoGallery {
         return NSFetchRequest<PhotoGallery>(entityName: "Photo")
     }
 
+    @NSManaged public var imageData: Data?
     @NSManaged public var photoCaption: String?
     @NSManaged public var photoTag: String?
-    @NSManaged public var imageData: Data?
     @NSManaged public var trip: Trip?
 
 }

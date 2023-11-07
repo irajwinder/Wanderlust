@@ -16,9 +16,9 @@ extension Journal {
         return NSFetchRequest<Journal>(entityName: "Journal")
     }
 
-    @NSManaged public var journalText: String?
     @NSManaged public var journalLocation: String?
     @NSManaged public var journalPhoto: Data?
+    @NSManaged public var journalText: String?
     @NSManaged public var journalTimeStamp: Date?
     @NSManaged public var trip: Trip?
 

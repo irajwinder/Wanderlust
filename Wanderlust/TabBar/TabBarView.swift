@@ -10,7 +10,7 @@ import SwiftUI
 struct TabBarView: View {
     var body: some View {
         TabView {
-            TripView()
+            AddTripView()
                 .tabItem {
                     Label("Trip", systemImage: "airplane")
                 }

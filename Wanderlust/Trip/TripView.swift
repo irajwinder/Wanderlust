@@ -9,10 +9,13 @@ import SwiftUI
 
 
 struct TripView: View {
+    @FetchRequest(sortDescriptors: []) var trips: FetchedResults<Trip>
     
     var body: some View {
         VStack {
-           Text("Trip")
+            List(trips) { trip in
+                Text(trip.tripName!)
+            }
         }
     }
 }

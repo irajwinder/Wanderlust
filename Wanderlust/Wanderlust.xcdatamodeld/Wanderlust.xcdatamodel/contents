@@ -7,13 +7,6 @@
         <attribute name="journalTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="journal" inverseEntity="Trip"/>
     </entity>
-    <entity name="Location" representedClassName=".Location" syncable="YES">
-        <attribute name="locationLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="locationLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="locationName" optional="YES" attributeType="String"/>
-        <attribute name="locationTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
-    </entity>
     <entity name="Photo" representedClassName=".PhotoGallery" syncable="YES">
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="photoCaption" optional="YES" attributeType="String"/>
@@ -23,10 +16,11 @@
     <entity name="Trip" representedClassName=".Trip" syncable="YES">
         <attribute name="tripCoverPhoto" optional="YES" attributeType="Binary"/>
         <attribute name="tripEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="tripLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tripLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="tripName" optional="YES" attributeType="String"/>
         <attribute name="tripStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="journal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Journal" inverseName="trip" inverseEntity="Journal"/>
-        <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="trip" inverseEntity="Location"/>
         <relationship name="photo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="trip" inverseEntity="Photo"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="trip" inverseEntity="User"/>
     </entity>
