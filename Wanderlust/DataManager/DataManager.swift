@@ -73,44 +73,44 @@ class DataManager: NSObject {
         }
     }
     
-    func saveJournal(journalText: String, journalPhoto: Data, journalLocation: String, journalTimeStamp: Date) {
-        // Access the view context from the persistent container
-        let context = persistentContainer.viewContext
-        // Create a new instance of the Journal entity in the context
-        let journal = Journal(context: context)
-        journal.journalText = journalText
-        journal.journalPhoto = journalPhoto
-        journal.journalLocation = journalLocation
-        journal.journalTimeStamp = journalTimeStamp
-        
-        do {
-            // Attempting to save the changes made to the context
-            try context.save()
-            print("Journal data saved successfully.")
-        } catch let error as NSError {
-            // Informs the user that an error occurred while saving the data.
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func savePhoto(imageData: Data, photoCaption: String, photoTag: String) {
-        // Access the view context from the persistent container
-        let context = persistentContainer.viewContext
-        // Create a new instance of the photoGallery entity in the context
-        let photoGallery = PhotoGallery(context: context)
-        photoGallery.imageData = imageData
-        photoGallery.photoCaption = photoCaption
-        photoGallery.photoTag = photoTag
-        
-        do {
-            // Attempting to save the changes made to the context
-            try context.save()
-            print("Photo data saved successfully.")
-        } catch let error as NSError {
-            // Informs the user that an error occurred while saving the data.
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
+//    func saveJournal(journalText: String, journalPhoto: Data, journalLocation: String, journalTimeStamp: Date) {
+//        // Access the view context from the persistent container
+//        let context = persistentContainer.viewContext
+//        // Create a new instance of the Journal entity in the context
+//        let journal = Journal(context: context)
+//        journal.journalText = journalText
+//        journal.journalPhoto = journalPhoto
+//        journal.journalLocation = journalLocation
+//        journal.journalTimeStamp = journalTimeStamp
+//        
+//        do {
+//            // Attempting to save the changes made to the context
+//            try context.save()
+//            print("Journal data saved successfully.")
+//        } catch let error as NSError {
+//            // Informs the user that an error occurred while saving the data.
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
+//    }
+//    
+//    func savePhoto(imageData: Data, photoCaption: String, photoTag: String) {
+//        // Access the view context from the persistent container
+//        let context = persistentContainer.viewContext
+//        // Create a new instance of the photoGallery entity in the context
+//        let photoGallery = PhotoGallery(context: context)
+//        photoGallery.imageData = imageData
+//        photoGallery.photoCaption = photoCaption
+//        photoGallery.photoTag = photoTag
+//        
+//        do {
+//            // Attempting to save the changes made to the context
+//            try context.save()
+//            print("Photo data saved successfully.")
+//        } catch let error as NSError {
+//            // Informs the user that an error occurred while saving the data.
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
+//    }
     
 }
 

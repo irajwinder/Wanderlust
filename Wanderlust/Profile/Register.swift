@@ -114,15 +114,15 @@ struct RegisterView: View {
 struct UserListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \User.userName, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \User.userEmail, ascending: true)],
         animation: .default)
     private var users: FetchedResults<User>
 
     var body: some View {
         List {
             ForEach(users, id: \.self) { user in
-                Text(user.userName ?? "")
                 Text(user.userEmail ?? "")
+                Text(user.userPassword ?? "")
             }
         }
     }
