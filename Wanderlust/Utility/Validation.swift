@@ -22,12 +22,12 @@ struct Validation {
             return true
         }
 
-        static func isValidLatitude(_ latitude: Double?) -> Bool {
-            guard let latitude = latitude, (latitude >= -90 && latitude <= 90) else {
-                return false
-            }
-            return true
+    static func isValidLatitude(_ latitude: Double?) -> Bool {
+        guard let latitude = latitude, (latitude >= -90 && latitude <= 90) else {
+            return false
         }
+        return true
+    }
 
     static func isValidEmail(_ email: String?) -> Bool {
         guard let email = email, !email.isEmpty else {
