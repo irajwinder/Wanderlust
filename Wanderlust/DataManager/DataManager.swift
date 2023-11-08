@@ -56,7 +56,7 @@ class DataManager: NSObject {
     func fetchUser(userEmail: String) -> User? {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        let fetchRequest = User.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "userEmail == %@", userEmail)
         
         do {
@@ -69,6 +69,25 @@ class DataManager: NSObject {
             return nil
         }
     }
+    
+    func updateUser(user: User, userName: String, userEmail: String, userDateOfBirth: Date) {
+        // Access the view context from the persistent container
+        let context = persistentContainer.viewContext
+
+        user.userName = userName
+        user.userEmail = userEmail
+        user.userDateOfBirth = userDateOfBirth
+        
+        do {
+            // Attempting to save the changes made to the context
+            try context.save()
+            print("User data saved successfully.")
+        } catch let error as NSError {
+            // Informs the user that an error occurred while saving the data.
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+
     
     func saveTrip(tripName: String, tripStartDate: Date, tripEndDate: Date, tripCoverPhoto: Data, tripLongitude: Double, tripLatitude: Double) {
         // Access the view context from the persistent container

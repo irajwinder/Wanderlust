@@ -19,7 +19,7 @@ struct WanderlustApp: App {
             } else {
                 Register()
             }
-                    //.environment(\.managedObjectContext, dataController.container.viewContext)
+                //.environment(\.managedObjectContext, dataController.container.viewContext)
                     //.environmentObject()
         }
     }
