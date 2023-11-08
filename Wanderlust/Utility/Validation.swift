@@ -15,20 +15,6 @@ struct Validation {
         return true
     }
     
-    static func isValidLongitude(_ longitude: Double?) -> Bool {
-            guard let longitude = longitude, (longitude >= -180 && longitude <= 180) else {
-                return false
-            }
-            return true
-        }
-
-    static func isValidLatitude(_ latitude: Double?) -> Bool {
-        guard let latitude = latitude, (latitude >= -90 && latitude <= 90) else {
-            return false
-        }
-        return true
-    }
-
     static func isValidEmail(_ email: String?) -> Bool {
         guard let email = email, !email.isEmpty else {
             return false
@@ -46,6 +32,20 @@ struct Validation {
 
     static func doPasswordsMatch(_ password: String?, _ confirmPassword: String?) -> Bool {
         guard let password = password, let confirmPassword = confirmPassword, password == confirmPassword else {
+            return false
+        }
+        return true
+    }
+    
+    static func isValidLongitude(_ longitude: Double?) -> Bool {
+            guard let longitude = longitude, (longitude >= -180 && longitude <= 180) else {
+                return false
+            }
+            return true
+        }
+
+    static func isValidLatitude(_ latitude: Double?) -> Bool {
+        guard let latitude = latitude, (latitude >= -90 && latitude <= 90) else {
             return false
         }
         return true
