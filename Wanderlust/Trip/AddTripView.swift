@@ -65,6 +65,8 @@ struct AddTripView: View {
 //                            if Validation.isValidName(tripName) || tripStartDate > tripEndDate || Validation.isValidLongitude(tripLongitude) || Validation.isValidLatitude(tripLatitude) {
 //                                showAlert = true
 //                            } else {
+                            
+                            //Save image to document directory and then save path in coredata(URL/ path)
                                 if let imageData = tripCoverPhoto?.jpegData(compressionQuality: 0.5) {
                                     dataManagerInstance.saveTrip(
                                         tripName: tripName,

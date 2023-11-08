@@ -9,12 +9,18 @@ import SwiftUI
 
 @main
 struct WanderlustApp: App {
-    @StateObject private var dataController = DataController()
-
+    //@StateObject private var dataController = DataController()
+    @AppStorage("isLoggedIn") var isLoggedIn = true
+    
     var body: some Scene {
         WindowGroup {
+            if isLoggedIn {
+                TabBarView()
+            } else {
                 Register()
-                    .environment(\.managedObjectContext, dataController.container.viewContext)
+            }
+                    //.environment(\.managedObjectContext, dataController.container.viewContext)
+                    //.environmentObject()
         }
     }
 }

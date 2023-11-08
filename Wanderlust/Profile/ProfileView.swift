@@ -13,6 +13,8 @@ struct ProfileView: View {
     
     @State private var profilePicture: UIImage? = UIImage(named: "logo")
     
+    @AppStorage("isLoggedIn") var isLoggedIn = true
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -44,14 +46,21 @@ struct ProfileView: View {
                         }
                     }
                 }
-            }.navigationBarTitle("User Profile")
-                .toolbar {
-                    ToolbarItem {
-                        Button(action: {}) {
-                            Label("Save", systemImage: "plus")
-                        }
+            }
+            .navigationBarTitle("User Profile")
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {}) {
+                        Label("Save", systemImage: "plus")
                     }
                 }
+            }
+            .navigationBarItems(trailing:
+                                    Button("Logout") {
+                // Perform the logout action
+                isLoggedIn = false
+            }
+            )
         }
     }
 }

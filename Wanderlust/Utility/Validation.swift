@@ -5,7 +5,7 @@
 //  Created by Rajwinder Singh on 11/3/23.
 //
 
-import UIKit
+import SwiftUI
 
 struct Validation {
     static func isValidName(_ name: String?) -> Bool {
@@ -51,13 +51,7 @@ struct Validation {
         return true
     }
 
-    static func showAlert(on viewController: UIViewController, with title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        viewController.present(alert, animated: true, completion: nil)
+    static func showAlert(title: String, message: String) -> Alert {
+        return Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK")))
     }
-
 }

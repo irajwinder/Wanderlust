@@ -26,7 +26,6 @@
 		A2702CF82AF3200D002CDAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702CF72AF3200D002CDAF7 /* ContentView.swift */; };
 		A2702CFA2AF3200F002CDAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2702CF92AF3200F002CDAF7 /* Assets.xcassets */; };
 		A2702CFD2AF3200F002CDAF7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2702CFC2AF3200F002CDAF7 /* Preview Assets.xcassets */; };
-		A2702CFF2AF3200F002CDAF7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702CFE2AF3200F002CDAF7 /* Persistence.swift */; };
 		A2702D022AF3200F002CDAF7 /* Wanderlust.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A2702D002AF3200F002CDAF7 /* Wanderlust.xcdatamodeld */; };
 		A2702D0D2AF3339B002CDAF7 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D0C2AF3339B002CDAF7 /* Register.swift */; };
 		A2702D122AF33DB9002CDAF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702D112AF33DB9002CDAF7 /* ProfileView.swift */; };
@@ -56,7 +55,6 @@
 		A2702CF72AF3200D002CDAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A2702CF92AF3200F002CDAF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2702CFC2AF3200F002CDAF7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A2702CFE2AF3200F002CDAF7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		A2702D012AF3200F002CDAF7 /* Wanderlust.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wanderlust.xcdatamodel; sourceTree = "<group>"; };
 		A2702D0C2AF3339B002CDAF7 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		A2702D112AF33DB9002CDAF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				A2702CF52AF3200D002CDAF7 /* WanderlustApp.swift */,
 				A2702CF72AF3200D002CDAF7 /* ContentView.swift */,
 				A2702CF92AF3200F002CDAF7 /* Assets.xcassets */,
-				A2702CFE2AF3200F002CDAF7 /* Persistence.swift */,
 				A2702D1C2AF3B306002CDAF7 /* Info.plist */,
 				A2702D002AF3200F002CDAF7 /* Wanderlust.xcdatamodeld */,
 				A2702CFB2AF3200F002CDAF7 /* Preview Content */,
@@ -299,7 +296,6 @@
 				A212CCE62AF958AB0080FF58 /* Trip+CoreDataClass.swift in Sources */,
 				A2702D332AF52CE9002CDAF7 /* Validation.swift in Sources */,
 				A212CCE92AF958AB0080FF58 /* PhotoGallery+CoreDataProperties.swift in Sources */,
-				A2702CFF2AF3200F002CDAF7 /* Persistence.swift in Sources */,
 				A212CCE22AF958AB0080FF58 /* Journal+CoreDataClass.swift in Sources */,
 				A2702D122AF33DB9002CDAF7 /* ProfileView.swift in Sources */,
 				A2702CF82AF3200D002CDAF7 /* ContentView.swift in Sources */,

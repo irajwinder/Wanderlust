@@ -8,14 +8,14 @@
 import Foundation
 import CoreData
 
-class DataController: ObservableObject {
-    let container = NSPersistentContainer(name: "Wanderlust")
-
-    init() {
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                fatalError("Failed to load Core Data stack: \(error)")
-            }
-        }
-    }
-}
+//class DataController: ObservableObject {
+//    let container = NSPersistentContainer(name: "Wanderlust")
+//
+//    init() {
+//        container.loadPersistentStores { description, error in
+//            if let error = error {
+//                fatalError("Failed to load Core Data stack: \(error)")
+//            }
+//        }
+//    }
+//}
