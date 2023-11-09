@@ -16,7 +16,7 @@ struct ProfileView: View {
     @AppStorage("isLoggedIn") var isLoggedIn = true
     
     @State private var selectedPickerImage: PhotosPickerItem?
-       @State private var profilePhoto: Image?
+    @State private var profilePhoto: Image?
     
     // Fetch User
     @FetchRequest(entity: User.entity(), sortDescriptors: []) var users: FetchedResults<User>
@@ -98,8 +98,9 @@ struct ProfileView: View {
             })
         }.onAppear(perform: {
             fetchUser()
-//            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-//            print(paths[0])
+            
+            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+            print(paths[0])
             
         })
     }
