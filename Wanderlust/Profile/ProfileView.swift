@@ -100,6 +100,7 @@ struct ProfileView: View {
                 isLoggedIn = false
             })
         }.onAppear(perform: {
+            
 //            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
 //            print(paths[0])
             

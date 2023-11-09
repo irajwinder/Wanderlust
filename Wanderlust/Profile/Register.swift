@@ -39,6 +39,7 @@ struct LoginView: View {
     
     // @AppStorage to store the login status
     @AppStorage("isLoggedIn") var isLoggedIn = false
+    @AppStorage("loggedInUserID") var loggedInUserID: String?
     
     var body: some View {
         NavigationView {
