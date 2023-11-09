@@ -14,12 +14,10 @@ struct ProfileView: View {
     @State private var userDOB = Date()
     
     @AppStorage("isLoggedIn") var isLoggedIn = true
+    @AppStorage("loggedInUserID") var loggedInUserID: String?
     
     @State private var selectedPickerImage: PhotosPickerItem?
     @State private var profilePhoto: Image?
-    
-    // Fetch User
-    @FetchRequest(entity: User.entity(), sortDescriptors: []) var users: FetchedResults<User>
     
     var body: some View {
         NavigationView {
@@ -33,9 +31,6 @@ struct ProfileView: View {
                 }
                 Form {
                     Section(header: Text("Personal Information")) {
-                        ForEach(users, id: \.self) { user in
-                            Text(user.userEmail ?? "no")
-                        }
                         HStack {
                             CustomText(text: "Name", textSize: 20, textColor: .black)
                             CustomTextField(placeholder: "Full Name", text: $userName)
@@ -100,6 +95,10 @@ struct ProfileView: View {
                 isLoggedIn = false
             })
         }.onAppear(perform: {
+            fetch()
+            if let loggedInUserID = loggedInUserID {
+                print("User ID is \(loggedInUserID)")
+            }
             
 //            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
 //            print(paths[0])
@@ -107,9 +106,25 @@ struct ProfileView: View {
         })
     }
     
+    func fetch() {
+        guard let loggedInUserID = loggedInUserID else {
+            return
+        }
+        print("User ID is \(loggedInUserID)")
+        
+        guard let user = dataManagerInstance.authenticateUser(userEmail: loggedInUserID) else {
+            return
+        }
+        
+        userName = user.userName ?? ""
+        userEmail = user.userEmail ?? ""
+        userDOB = user.userDateOfBirth ?? Date()
+    }
+    
     func saveImageToFileManager(_ uiImage: UIImage) {
         if let imageData = uiImage.jpegData(compressionQuality: 0.5) {
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMddHHmmss"
             let dateString = formatter.string(from: Date())

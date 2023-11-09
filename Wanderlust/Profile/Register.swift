@@ -92,6 +92,7 @@ struct LoginView: View {
         }
         
         //Logged in Successfully
+        loggedInUserID = email
         isLoggedIn = true
     }
 }
