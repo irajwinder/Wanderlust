@@ -72,7 +72,7 @@ struct LoginView: View {
             return
         }
         
-        guard let user = dataManagerInstance.fetchUser(userEmail: email), Validation.isValidEmail(email) else {
+        guard let user = dataManagerInstance.authenticateUser(userEmail: email), Validation.isValidEmail(email) else {
             showAlert = true
             alert = Validation.showAlert(title: "Error", message: "User not found")
             return
@@ -166,28 +166,8 @@ struct RegisterView: View {
     }
 }
 
-
-struct UserListView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \User.userEmail, ascending: true)],
-        animation: .default)
-    private var users: FetchedResults<User>
-
-    var body: some View {
-        List {
-            ForEach(users, id: \.self) { user in
-                Text(user.userEmail ?? "")
-                Text(user.userPassword ?? "")
-            }
-        }
-    }
-}
-
-
 #Preview {
     Group {
         Register()
-        UserListView()
     }
 }

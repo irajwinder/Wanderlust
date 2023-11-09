@@ -53,7 +53,7 @@ class DataManager: NSObject {
         }
     }
     
-    func fetchUser(userEmail: String) -> User? {
+    func authenticateUser(userEmail: String) -> User? {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
         let fetchRequest = User.fetchRequest()
@@ -95,6 +95,7 @@ class DataManager: NSObject {
         
         if let entity = NSEntityDescription.entity(forEntityName: "Trip", in: context) {
             let trip = NSManagedObject(entity: entity, insertInto: context)
+            
             trip.setValue(tripName, forKey: "tripName")
             trip.setValue(tripStartDate, forKey: "tripStartDate")
             trip.setValue(tripEndDate, forKey: "tripEndDate")
@@ -119,6 +120,7 @@ class DataManager: NSObject {
         // Create a new instance of the Journal entity in the context
         let journal = Journal(context: context)
         journal.setValue(tripName, forKey: "trip")
+        
         journal.journalText = journalText
         journal.journalPhoto = journalPhoto
         journal.journalLocation = journalLocation
@@ -151,6 +153,22 @@ class DataManager: NSObject {
         } catch let error as NSError {
             // Informs the user that an error occurred while saving the data.
             print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteEntity(_ entity: NSManagedObject) {
+        // Access the view context from the persistent container
+        let context = persistentContainer.viewContext
+        // Remove the trip from the context
+        context.delete(entity)
+
+        do {
+            // Attempting to save the changes made to the context
+            try context.save()
+            print("Trip deleted successfully.")
+        } catch let error as NSError {
+            // Informs the user that an error occurred while saving the data.
+            print("Could not delete. \(error), \(error.userInfo)")
         }
     }
     

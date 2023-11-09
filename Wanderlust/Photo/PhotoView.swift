@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct PhotoView: View {
+    let selectedTrip: Trip?
+    
     var body: some View {
         Text("PhotoView!")
     }
 }
 
 #Preview {
-    PhotoView()
+    PhotoView(selectedTrip: Trip())
 }

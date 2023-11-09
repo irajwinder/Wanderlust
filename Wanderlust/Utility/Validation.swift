@@ -50,6 +50,18 @@ struct Validation {
         }
         return true
     }
+    
+    static func isValidDateOfBirth(_ date: Date) -> Bool {
+        return date <= Date() // Checks if the date is not in the future
+    }
+    
+    static func isValidTripStartDate(_ date: Date) -> Bool {
+        return date >= Date() // Checks if the date is not in the past
+    }
+    
+    static func isValidTripEndDate(_ endDate: Date, startDate: Date) -> Bool {
+        return endDate > startDate
+    }
 
     static func showAlert(title: String, message: String) -> Alert {
         return Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK")))
