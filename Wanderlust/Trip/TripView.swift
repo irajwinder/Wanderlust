@@ -43,6 +43,10 @@ struct TripView: View {
         }.sheet(isPresented: $isAddTripView) {
             AddTripView()
         }
+        .onAppear(perform: {
+            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+            print(paths[0])
+        })
        
     }
 }

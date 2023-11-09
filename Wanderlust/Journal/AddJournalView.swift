@@ -16,8 +16,12 @@ struct AddJournalView: View {
     
     @State private var journalText: String = ""
     @State private var journalImage: UIImage?
-    @State private var journalLocation: String = ""
-    @State private var journalTimeStamp = Date()
+    @State private var photoTimeStamp = Date()
+    @State private var photoLongitude: Double = 0.0
+    @State private var photoLatitude: Double = 0.0
+    @State private var photoTag: String = ""
+    @State private var photoCaption: String = ""
+    
     
     @State private var showAlert = false
     @State private var alert: Alert?
@@ -35,10 +39,28 @@ struct AddJournalView: View {
                             CustomTextField(placeholder: "Journal Name", text: $journalText)
                                 .padding()
                         }
+
+                        HStack {
+                            CustomText(text: "Photo Caption", textSize: 20, textColor: .black)
+                            CustomTextField(placeholder: "Photo Caption", text: $photoCaption)
+                                .padding()
+                        }
                         
                         HStack {
-                            CustomText(text: "Journal Location", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Journal Location", text: $journalLocation)
+                            CustomText(text: "Photo Tag", textSize: 20, textColor: .black)
+                            CustomTextField(placeholder: "Photo Tag", text: $photoTag)
+                                .padding()
+                        }
+                        
+                        HStack {
+                            CustomText(text: "Longitude", textSize: 20, textColor: .black)
+                            CustomTextField(placeholder: "Longitude", text: .constant(String(photoLongitude)))
+                                .padding()
+                        }
+                        
+                        HStack {
+                            CustomText(text: "Latitude", textSize: 20, textColor: .black)
+                            CustomTextField(placeholder: "Latitude", text: .constant(String(photoLatitude)))
                                 .padding()
                         }
                         
@@ -98,9 +120,27 @@ struct AddJournalView: View {
             return
         }
         
-        guard Validation.isValidName(journalLocation) else {
+        guard Validation.isValidName(photoCaption) else {
             showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Journal Location")
+            alert = Validation.showAlert(title: "Error", message: "Invalid Caption")
+            return
+        }
+        
+        guard Validation.isValidName(photoTag) else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Invalid Tag")
+            return
+        }
+        
+        guard Validation.isValidLongitude(photoLongitude) else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Invalid Photo Longitude")
+            return
+        }
+        
+        guard Validation.isValidLatitude(photoLatitude) else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Invalid Photo Latitude")
             return
         }
         
@@ -114,8 +154,18 @@ struct AddJournalView: View {
             tripName: selectedTrip,
             journalText: journalText,
             journalPhoto: Data(),
-            journalLocation: journalLocation,
-            journalTimeStamp: journalTimeStamp
+            photoLatitude: photoLatitude,
+            photoLongitude: photoLongitude,
+            photoCaption: photoCaption,
+            photoTag: photoTag,
+            photoTimeStamp: photoTimeStamp
+//            tripName: selectedTrip,
+//            journalText: journalText,
+//            journalPhoto: Data(),
+//            journalLocation: journalLocation,
+//            journalTimeStamp: journalTimeStamp,
+//            tripLongitude: tripLongitude,
+//            tripLatitude: tripLatitude
         )
         
         // Show a success alert

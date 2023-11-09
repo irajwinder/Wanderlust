@@ -24,6 +24,8 @@ struct AddTripView: View {
     @State private var selectedPickerImage: PhotosPickerItem?
     @State private var coverPhoto: Image?
     
+    @AppStorage("loggedInUserID") var loggedInUserID: String?
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -44,18 +46,6 @@ struct AddTripView: View {
                         HStack {
                             CustomText(text: "End Date", textSize: 20, textColor: .black)
                             CustomDatePicker(selectedDate: $tripEndDate)
-                                .padding()
-                        }
-                        
-                        HStack {
-                            CustomText(text: "Longitude", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Longitude", text: .constant(String(tripLongitude)))
-                                .padding()
-                        }
-                        
-                        HStack {
-                            CustomText(text: "Latitude", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Latitude", text: .constant(String(tripLatitude)))
                                 .padding()
                         }
                         
@@ -131,26 +121,22 @@ struct AddTripView: View {
             return
         }
         
-        guard Validation.isValidLongitude(tripLongitude) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Trip Longitude")
+        guard let loggedInUserID = loggedInUserID else {
+            print("Could not unwrap")
             return
         }
-        
-        guard Validation.isValidLatitude(tripLatitude) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Trip Latitude")
+        guard let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
+            print("Could not fetch")
             return
         }
         
         // Save Trip Details
         dataManagerInstance.saveTrip(
+            user: user,
             tripName: tripName,
             tripStartDate: tripStartDate,
             tripEndDate: tripEndDate,
-            tripCoverPhoto: Data(),
-            tripLongitude: tripLongitude,
-            tripLatitude: tripLatitude
+            tripCoverPhoto: Data()
         )
         
         // Show a success alert

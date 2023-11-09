@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Journal" representedClassName=".Journal" syncable="YES">
-        <attribute name="journalLocation" optional="YES" attributeType="String"/>
         <attribute name="journalPhoto" optional="YES" attributeType="Binary"/>
         <attribute name="journalText" optional="YES" attributeType="String"/>
-        <attribute name="journalTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="photoCaption" optional="YES" attributeType="String"/>
+        <attribute name="photoLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="photoLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="photoTag" optional="YES" attributeType="String"/>
+        <attribute name="photoTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="journal" inverseEntity="Trip"/>
     </entity>
     <entity name="Photo" representedClassName=".PhotoGallery" syncable="YES">
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
-        <attribute name="photoCaption" optional="YES" attributeType="String"/>
-        <attribute name="photoTag" optional="YES" attributeType="String"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="photo" inverseEntity="Trip"/>
     </entity>
     <entity name="Trip" representedClassName=".Trip" syncable="YES">
         <attribute name="tripCoverPhoto" optional="YES" attributeType="Binary"/>
         <attribute name="tripEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="tripLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="tripLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="tripName" optional="YES" attributeType="String"/>
         <attribute name="tripStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="journal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Journal" inverseName="trip" inverseEntity="Journal"/>
-        <relationship name="photo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="trip" inverseEntity="Photo"/>
+        <relationship name="journal" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Journal" inverseName="trip" inverseEntity="Journal"/>
+        <relationship name="photo" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="trip" inverseEntity="Photo"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="trip" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
@@ -30,6 +29,6 @@
         <attribute name="userName" optional="YES" attributeType="String"/>
         <attribute name="userPassword" optional="YES" attributeType="String"/>
         <attribute name="userProfilePhoto" optional="YES" attributeType="Binary"/>
-        <relationship name="trip" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trip" inverseName="user" inverseEntity="Trip"/>
+        <relationship name="trip" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Trip" inverseName="user" inverseEntity="Trip"/>
     </entity>
 </model>

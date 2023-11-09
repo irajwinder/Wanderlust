@@ -96,29 +96,26 @@ struct ProfileView: View {
             })
         }.onAppear(perform: {
             fetch()
-            if let loggedInUserID = loggedInUserID {
-                print("User ID is \(loggedInUserID)")
-            }
-            
-//            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-//            print(paths[0])
-            
         })
     }
     
     func fetch() {
         guard let loggedInUserID = loggedInUserID else {
+            print("Could not unwrap")
             return
         }
-        print("User ID is \(loggedInUserID)")
-        
-        guard let user = dataManagerInstance.authenticateUser(userEmail: loggedInUserID) else {
+        guard let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
+            print("Could not fetch")
             return
         }
         
         userName = user.userName ?? ""
         userEmail = user.userEmail ?? ""
         userDOB = user.userDateOfBirth ?? Date()
+//        if let imageData = user.userProfilePhoto, let uiImage = UIImage(data: imageData) {
+//               profilePhoto = Image(uiImage: uiImage)
+//           }
+        
     }
     
     func saveImageToFileManager(_ uiImage: UIImage) {

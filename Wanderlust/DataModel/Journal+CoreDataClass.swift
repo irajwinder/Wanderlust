@@ -2,7 +2,7 @@
 //  Journal+CoreDataClass.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/6/23.
+//  Created by Rajwinder Singh on 11/9/23.
 //
 //
 

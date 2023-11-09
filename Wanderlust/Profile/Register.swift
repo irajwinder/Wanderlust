@@ -73,7 +73,7 @@ struct LoginView: View {
             return
         }
         
-        guard let user = dataManagerInstance.authenticateUser(userEmail: email), Validation.isValidEmail(email) else {
+        guard let user = dataManagerInstance.fetchUser(userEmail: email), Validation.isValidEmail(email) else {
             showAlert = true
             alert = Validation.showAlert(title: "Error", message: "User not found")
             return

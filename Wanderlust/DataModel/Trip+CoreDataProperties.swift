@@ -2,7 +2,7 @@
 //  Trip+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/6/23.
+//  Created by Rajwinder Singh on 11/9/23.
 //
 //
 
@@ -20,8 +20,6 @@ extension Trip {
     @NSManaged public var tripEndDate: Date?
     @NSManaged public var tripName: String?
     @NSManaged public var tripStartDate: Date?
-    @NSManaged public var tripLongitude: Double
-    @NSManaged public var tripLatitude: Double
     @NSManaged public var journal: NSSet?
     @NSManaged public var photo: NSSet?
     @NSManaged public var user: User?

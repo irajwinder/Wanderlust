@@ -2,7 +2,7 @@
 //  PhotoGallery+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/6/23.
+//  Created by Rajwinder Singh on 11/9/23.
 //
 //
 
@@ -17,8 +17,6 @@ extension PhotoGallery {
     }
 
     @NSManaged public var imageData: Data?
-    @NSManaged public var photoCaption: String?
-    @NSManaged public var photoTag: String?
     @NSManaged public var trip: Trip?
 
 }
