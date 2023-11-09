@@ -33,6 +33,9 @@ struct ProfileView: View {
                 }
                 Form {
                     Section(header: Text("Personal Information")) {
+                        ForEach(users, id: \.self) { user in
+                            Text(user.userEmail ?? "no")
+                        }
                         HStack {
                             CustomText(text: "Name", textSize: 20, textColor: .black)
                             CustomTextField(placeholder: "Full Name", text: $userName)
@@ -97,10 +100,8 @@ struct ProfileView: View {
                 isLoggedIn = false
             })
         }.onAppear(perform: {
-            fetchUser()
-            
-            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-            print(paths[0])
+//            let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+//            print(paths[0])
             
         })
     }
@@ -120,11 +121,6 @@ struct ProfileView: View {
                 print("Error saving image:", error.localizedDescription)
             }
         }
-    }
-    
-    func fetchUser() {
-      
-
     }
 
 }

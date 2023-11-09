@@ -85,7 +85,9 @@ struct AddJournalView: View {
                 }.alert(isPresented: $showAlert) {
                     alert!
                 }
-        }
+        } .onAppear(perform: {
+            //On Appear
+        })
         
     }
     
@@ -102,9 +104,14 @@ struct AddJournalView: View {
             return
         }
         
+        guard let selectedTrip = selectedTrip else {
+            print("Could not fetch")
+            return
+        }
+        
         // Save Journal Details
         dataManagerInstance.saveJournal(
-            tripName: selectedTrip!,
+            tripName: selectedTrip,
             journalText: journalText,
             journalPhoto: Data(),
             journalLocation: journalLocation,

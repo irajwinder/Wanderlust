@@ -42,7 +42,9 @@ struct JournalView: View {
         
         }.sheet(isPresented: $isAddJournalView) {
             AddJournalView(selectedTrip: selectedTrip)
-        }
+        }.onAppear(perform: {
+            //On Appear
+        })
     }
 }
 
