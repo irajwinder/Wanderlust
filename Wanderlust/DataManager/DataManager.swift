@@ -30,7 +30,7 @@ class DataManager: NSObject {
         return container
     }()
     
-    func saveUser(userName: String, userEmail: String, userPassword: String, userDateOfBirth: Date, userProfilePhoto: Data) {
+    func saveUser(userName: String, userEmail: String, userPassword: String, userDateOfBirth: Date, userProfilePhoto: String) {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
 
@@ -70,13 +70,14 @@ class DataManager: NSObject {
         }
     }
     
-    func updateUser(user: User, userName: String, userEmail: String, userDateOfBirth: Date) {
+    func updateUser(user: User, userName: String, userEmail: String, userDateOfBirth: Date, profilePicticture: String) {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
 
         user.userName = userName
         user.userEmail = userEmail
         user.userDateOfBirth = userDateOfBirth
+        user.userProfilePhoto = profilePicticture
         
         do {
             // Attempting to save the changes made to the context

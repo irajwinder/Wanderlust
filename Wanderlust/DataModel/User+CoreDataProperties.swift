@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/9/23.
+//  Created by Rajwinder Singh on 11/10/23.
 //
 //
 
@@ -20,7 +20,7 @@ extension User {
     @NSManaged public var userEmail: String?
     @NSManaged public var userName: String?
     @NSManaged public var userPassword: String?
-    @NSManaged public var userProfilePhoto: Data?
+    @NSManaged public var userProfilePhoto: String?
     @NSManaged public var trip: NSSet?
 
 }

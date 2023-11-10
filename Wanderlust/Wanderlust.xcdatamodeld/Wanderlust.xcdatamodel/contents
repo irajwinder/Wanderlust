@@ -28,7 +28,7 @@
         <attribute name="userEmail" optional="YES" attributeType="String"/>
         <attribute name="userName" optional="YES" attributeType="String"/>
         <attribute name="userPassword" optional="YES" attributeType="String"/>
-        <attribute name="userProfilePhoto" optional="YES" attributeType="Binary"/>
+        <attribute name="userProfilePhoto" optional="YES" attributeType="String"/>
         <relationship name="trip" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Trip" inverseName="user" inverseEntity="Trip"/>
     </entity>
 </model>

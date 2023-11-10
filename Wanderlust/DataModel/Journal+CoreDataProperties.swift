@@ -2,7 +2,7 @@
 //  Journal+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/9/23.
+//  Created by Rajwinder Singh on 11/10/23.
 //
 //
 
@@ -18,11 +18,11 @@ extension Journal {
 
     @NSManaged public var journalPhoto: Data?
     @NSManaged public var journalText: String?
-    @NSManaged public var photoTimeStamp: Date?
+    @NSManaged public var photoCaption: String?
     @NSManaged public var photoLatitude: Double
     @NSManaged public var photoLongitude: Double
     @NSManaged public var photoTag: String?
-    @NSManaged public var photoCaption: String?
+    @NSManaged public var photoTimeStamp: Date?
     @NSManaged public var trip: Trip?
 
 }

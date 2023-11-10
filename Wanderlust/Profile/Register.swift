@@ -154,7 +154,7 @@ struct RegisterView: View {
             userEmail: email,
             userPassword: password,
             userDateOfBirth: Date(),
-            userProfilePhoto: Data()
+            userProfilePhoto: ""
         )
         
         // Show a success alert
