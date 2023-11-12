@@ -18,10 +18,8 @@ struct ProfileView: View {
     
     @State private var selectedPickerImage: PhotosPickerItem?
     @State private var profilePhoto: Image?
-    
     @State private var userProfilePicture: UIImage?
-    
-    @State private var profilePhotoURL: URL?
+    @State private var profilePhotoURL: String?
     
     var body: some View {
         NavigationView {
@@ -111,26 +109,40 @@ struct ProfileView: View {
             print("Could not unwrap")
             return
         }
+        
+        // Fetch the user from the data manager
         guard let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
             print("Could not fetch")
             return
         }
-        
+
+        // Update local properties with user information
         userName = user.userName ?? ""
         userEmail = user.userEmail ?? ""
         userDOB = user.userDateOfBirth ?? Date()
 
-        guard let profilePictureURLString = user.userProfilePhoto,
-              let profilePictureURL = URL(string: profilePictureURLString) else {
-            print("Could not fetch profile picture URL")
+        // Extract the relative path to the user's profile picture
+        guard let profilePictureRelativePath = user.userProfilePhoto else {
+            print("Could not fetch profile picture path")
             return
         }
 
-        // Load the image from the URL and assign it to userProfilePicture
+        // Construct the local file URL by appending the relative path to the documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let localFileURL = documentsDirectory.appendingPathComponent(profilePictureRelativePath)
+
+        // Load the image from the local file URL and assign it to userProfilePicture
         Task {
-            if let data = try? await URLSession.shared.data(from: profilePictureURL).0,
-               let uiImage = UIImage(data: data) {
-                userProfilePicture = uiImage
+            do {
+                // Read image data from the local file
+                let imageData = try Data(contentsOf: localFileURL)
+
+                // Convert image data to UIImage
+                if let uiImage = UIImage(data: imageData) {
+                    userProfilePicture = uiImage
+                }
+            } catch {
+                print("Error loading image:", error.localizedDescription)
             }
         }
     }
@@ -150,19 +162,20 @@ struct ProfileView: View {
             userName: userName,
             userEmail: userEmail,
             userDateOfBirth: userDOB,
-            profilePicticture: profilePhotoURL?.absoluteString ?? ""
+            profilePicticture: profilePhotoURL!
         )
         
         fetch()
         profilePhoto = nil
     }
     
-    func saveImageToFileManager(_ uiImage: UIImage) -> URL? {
+    func saveImageToFileManager(_ uiImage: UIImage) -> String? {
         if let imageData = uiImage.jpegData(compressionQuality: 0.5) {
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             
             let folderName = "ProfilePicture"
             let fileName = "Picture.jpg"
+            let URL = "\(folderName)/\(fileName)"
             let fileURL = documentsDirectory.appendingPathComponent(folderName, isDirectory: true).appendingPathComponent(fileName)
             do {
                 // Create the folder if it doesn't exist
@@ -171,7 +184,7 @@ struct ProfileView: View {
                 // Write the image data to the file
                 try imageData.write(to: fileURL)
                 print("Image saved at: \(fileURL)")
-                return fileURL
+                return URL
             } catch {
                 print("Error saving image:", error.localizedDescription)
                 return nil

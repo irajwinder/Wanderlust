@@ -17,9 +17,8 @@ struct JournalView: View {
     private var journals: FetchedResults<Journal>
 
     var body: some View {
-        NavigationView {
             List {
-                ForEach(journals, id: \.self) { journal in
+                ForEach(journals.filter { $0.trip?.tripName == selectedTrip?.tripName }, id: \.self) { journal in
                     NavigationLink(destination: PhotoView(selectedTrip: selectedTrip)) {
                         Text(journal.journalText ?? "")
                     }
@@ -38,9 +37,7 @@ struct JournalView: View {
                             Label("Save", systemImage: "plus")
                         }
                     }
-                }
-        
-        }.sheet(isPresented: $isAddJournalView) {
+                }.sheet(isPresented: $isAddJournalView) {
             AddJournalView(selectedTrip: selectedTrip)
         }.onAppear(perform: {
             //On Appear

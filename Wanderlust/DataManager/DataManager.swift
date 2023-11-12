@@ -7,9 +7,13 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 //Singleton Class
 class DataManager: NSObject {
+    
+    var locationManager: CLLocationManager?
+    var userLocation: CLLocation?
     
     static let sharedInstance: DataManager = {
         let instance = DataManager()
@@ -171,6 +175,63 @@ class DataManager: NSObject {
         }
     }
     
+    
+    func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager?.activityType = CLActivityType.automotiveNavigation
+        locationManager?.distanceFilter = kCLDistanceFilterNone
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager?.allowsBackgroundLocationUpdates = false
+        locationManager?.pausesLocationUpdatesAutomatically = true
+        locationManager?.delegate = self
+        requestPersmission()
+    }
+    
+    
+    func requestPersmission() {
+        let status = locationManager?.authorizationStatus
+        if status == .notDetermined {
+            locationManager?.requestWhenInUseAuthorization()
+        }
+        
+    }
+    
+    func checkForPermission() {
+        if CLLocationManager.locationServicesEnabled() {
+            
+        }
+    }
+    
+    func forceLocationUpdate() {
+        locationManager?.requestLocation()
+    }
+    
+    func startTrackingLocation() {
+        locationManager?.startUpdatingLocation()
+    }
+    
+    func stopTracking() {
+        locationManager?.stopUpdatingLocation()
+    }
+    
 }
 
 let dataManagerInstance = DataManager.sharedInstance
+
+
+extension DataManager: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if locations.count >= 1 {
+            userLocation = locations[0]
+            
+            print(userLocation!.coordinate.latitude)
+            print(userLocation!.coordinate.longitude)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+}

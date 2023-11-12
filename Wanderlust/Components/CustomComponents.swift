@@ -49,7 +49,7 @@ struct CustomImage: View {
             Image(uiImage: profilePicture ?? UIImage(systemName: "person.fill")!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 150, height: 150)
+                .frame(width: 120, height: 120)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 .shadow(radius: 10)
@@ -71,20 +71,16 @@ struct CustomCoverPhoto: View {
     var coverPhoto: UIImage?
     
     var body: some View {
-        ZStack {
-            if let coverPhoto = coverPhoto {
-                Image(uiImage: coverPhoto)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 200, height: 200)
-                    .clipped()
-            } else {
-                Color.gray
-            }
+        VStack {
+            Image(uiImage: coverPhoto ?? UIImage(systemName: "person.fill")!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 1))
         }
     }
 }
-
 
 #Preview {
     Group {
