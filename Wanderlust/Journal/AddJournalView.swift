@@ -142,13 +142,6 @@ struct AddJournalView: View {
             photoLatitude: photoLatitude,
             photoLongitude: photoLongitude,
             photoTimeStamp: photoTimeStamp
-//            tripName: selectedTrip,
-//            journalText: journalText,
-//            journalPhoto: Data(),
-//            journalLocation: journalLocation,
-//            journalTimeStamp: journalTimeStamp,
-//            tripLongitude: tripLongitude,
-//            tripLatitude: tripLatitude
         )
         
         // Show a success alert
