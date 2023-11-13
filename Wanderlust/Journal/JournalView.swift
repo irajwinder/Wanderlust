@@ -7,9 +7,17 @@
 
 import SwiftUI
 
+class JournalViewModel: ObservableObject {
+    func fetchJournals() {
+        
+    }
+}
+
 struct JournalView: View {
     let selectedTrip: Trip?
     @State private var isAddJournalView = false
+    
+    @StateObject private var viewModel = JournalViewModel()
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Journal.journalText, ascending: true)],
@@ -38,7 +46,7 @@ struct JournalView: View {
                         }
                     }
                 }.sheet(isPresented: $isAddJournalView) {
-            AddJournalView(selectedTrip: selectedTrip)
+                    AddJournalView(viewModel: viewModel, selectedTrip: selectedTrip)
         }.onAppear(perform: {
             //On Appear
         })
@@ -48,4 +56,3 @@ struct JournalView: View {
 #Preview {
     JournalView(selectedTrip: Trip())
 }
-

@@ -75,7 +75,7 @@ struct CustomCoverPhoto: View {
             Image(uiImage: coverPhoto ?? UIImage(systemName: "person.fill")!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
+                .frame(width: 100, height: 100)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
         }

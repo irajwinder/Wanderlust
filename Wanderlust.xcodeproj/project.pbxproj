@@ -14,15 +14,15 @@
 		A212CCC42AF91F6D0080FF58 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCC32AF91F6D0080FF58 /* TabBarView.swift */; };
 		A212CCEB2AF9A0450080FF58 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCEA2AF9A0450080FF58 /* DataController.swift */; };
 		A212CCED2AF9A2AF0080FF58 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCEC2AF9A2AF0080FF58 /* AddTripView.swift */; };
+		A21552912B02666F0006162B /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21552892B02666F0006162B /* Journal+CoreDataClass.swift */; };
+		A21552922B02666F0006162B /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528A2B02666F0006162B /* Journal+CoreDataProperties.swift */; };
+		A21552932B02666F0006162B /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528B2B02666F0006162B /* Trip+CoreDataClass.swift */; };
+		A21552942B02666F0006162B /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528C2B02666F0006162B /* Trip+CoreDataProperties.swift */; };
+		A21552952B02666F0006162B /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528D2B02666F0006162B /* User+CoreDataClass.swift */; };
+		A21552962B02666F0006162B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528E2B02666F0006162B /* User+CoreDataProperties.swift */; };
+		A21552972B02666F0006162B /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528F2B02666F0006162B /* Photo+CoreDataClass.swift */; };
+		A21552982B02666F0006162B /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21552902B02666F0006162B /* Photo+CoreDataProperties.swift */; };
 		A25CB4B32AFC94770000A70F /* AddJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB4B22AFC94770000A70F /* AddJournalView.swift */; };
-		A25CB51C2AFE557B0000A70F /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB5142AFE557B0000A70F /* Journal+CoreDataClass.swift */; };
-		A25CB51D2AFE557B0000A70F /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB5152AFE557B0000A70F /* Journal+CoreDataProperties.swift */; };
-		A25CB51E2AFE557B0000A70F /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB5162AFE557B0000A70F /* User+CoreDataClass.swift */; };
-		A25CB51F2AFE557B0000A70F /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB5172AFE557B0000A70F /* User+CoreDataProperties.swift */; };
-		A25CB5202AFE557B0000A70F /* PhotoGallery+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB5182AFE557B0000A70F /* PhotoGallery+CoreDataClass.swift */; };
-		A25CB5212AFE557B0000A70F /* PhotoGallery+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB5192AFE557B0000A70F /* PhotoGallery+CoreDataProperties.swift */; };
-		A25CB5222AFE557B0000A70F /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB51A2AFE557B0000A70F /* Trip+CoreDataClass.swift */; };
-		A25CB5232AFE557B0000A70F /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CB51B2AFE557B0000A70F /* Trip+CoreDataProperties.swift */; };
 		A2702CF62AF3200D002CDAF7 /* WanderlustApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702CF52AF3200D002CDAF7 /* WanderlustApp.swift */; };
 		A2702CF82AF3200D002CDAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2702CF72AF3200D002CDAF7 /* ContentView.swift */; };
 		A2702CFA2AF3200F002CDAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2702CF92AF3200F002CDAF7 /* Assets.xcassets */; };
@@ -43,15 +43,15 @@
 		A212CCC32AF91F6D0080FF58 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A212CCEA2AF9A0450080FF58 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		A212CCEC2AF9A2AF0080FF58 /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
+		A21552892B02666F0006162B /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A215528A2B02666F0006162B /* Journal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A215528B2B02666F0006162B /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A215528C2B02666F0006162B /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A215528D2B02666F0006162B /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A215528E2B02666F0006162B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A215528F2B02666F0006162B /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A21552902B02666F0006162B /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A25CB4B22AFC94770000A70F /* AddJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalView.swift; sourceTree = "<group>"; };
-		A25CB5142AFE557B0000A70F /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A25CB5152AFE557B0000A70F /* Journal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A25CB5162AFE557B0000A70F /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A25CB5172AFE557B0000A70F /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A25CB5182AFE557B0000A70F /* PhotoGallery+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGallery+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A25CB5192AFE557B0000A70F /* PhotoGallery+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGallery+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A25CB51A2AFE557B0000A70F /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A25CB51B2AFE557B0000A70F /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A2702CF22AF3200D002CDAF7 /* Wanderlust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wanderlust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2702CF52AF3200D002CDAF7 /* WanderlustApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WanderlustApp.swift; sourceTree = "<group>"; };
 		A2702CF72AF3200D002CDAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,14 +203,14 @@
 		A2702D272AF3E9D4002CDAF7 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				A25CB5142AFE557B0000A70F /* Journal+CoreDataClass.swift */,
-				A25CB5152AFE557B0000A70F /* Journal+CoreDataProperties.swift */,
-				A25CB5162AFE557B0000A70F /* User+CoreDataClass.swift */,
-				A25CB5172AFE557B0000A70F /* User+CoreDataProperties.swift */,
-				A25CB5182AFE557B0000A70F /* PhotoGallery+CoreDataClass.swift */,
-				A25CB5192AFE557B0000A70F /* PhotoGallery+CoreDataProperties.swift */,
-				A25CB51A2AFE557B0000A70F /* Trip+CoreDataClass.swift */,
-				A25CB51B2AFE557B0000A70F /* Trip+CoreDataProperties.swift */,
+				A21552892B02666F0006162B /* Journal+CoreDataClass.swift */,
+				A215528A2B02666F0006162B /* Journal+CoreDataProperties.swift */,
+				A215528B2B02666F0006162B /* Trip+CoreDataClass.swift */,
+				A215528C2B02666F0006162B /* Trip+CoreDataProperties.swift */,
+				A215528D2B02666F0006162B /* User+CoreDataClass.swift */,
+				A215528E2B02666F0006162B /* User+CoreDataProperties.swift */,
+				A215528F2B02666F0006162B /* Photo+CoreDataClass.swift */,
+				A21552902B02666F0006162B /* Photo+CoreDataProperties.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -286,29 +286,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2702D312AF52BDC002CDAF7 /* DataManager.swift in Sources */,
-				A25CB5222AFE557B0000A70F /* Trip+CoreDataClass.swift in Sources */,
 				A212CCBC2AF91D3E0080FF58 /* MapView.swift in Sources */,
-				A25CB5202AFE557B0000A70F /* PhotoGallery+CoreDataClass.swift in Sources */,
 				A212CCB82AF91CC50080FF58 /* TripView.swift in Sources */,
-				A25CB51E2AFE557B0000A70F /* User+CoreDataClass.swift in Sources */,
 				A2702D1B2AF3AB3A002CDAF7 /* CustomComponents.swift in Sources */,
 				A212CCC42AF91F6D0080FF58 /* TabBarView.swift in Sources */,
 				A2702D022AF3200F002CDAF7 /* Wanderlust.xcdatamodeld in Sources */,
+				A21552982B02666F0006162B /* Photo+CoreDataProperties.swift in Sources */,
+				A21552972B02666F0006162B /* Photo+CoreDataClass.swift in Sources */,
 				A212CCBE2AF91D620080FF58 /* PhotoView.swift in Sources */,
 				A2702D332AF52CE9002CDAF7 /* Validation.swift in Sources */,
 				A2702D122AF33DB9002CDAF7 /* ProfileView.swift in Sources */,
 				A2702CF82AF3200D002CDAF7 /* ContentView.swift in Sources */,
+				A21552932B02666F0006162B /* Trip+CoreDataClass.swift in Sources */,
 				A2702CF62AF3200D002CDAF7 /* WanderlustApp.swift in Sources */,
-				A25CB5212AFE557B0000A70F /* PhotoGallery+CoreDataProperties.swift in Sources */,
 				A2702D0D2AF3339B002CDAF7 /* Register.swift in Sources */,
-				A25CB51C2AFE557B0000A70F /* Journal+CoreDataClass.swift in Sources */,
+				A21552912B02666F0006162B /* Journal+CoreDataClass.swift in Sources */,
 				A212CCEB2AF9A0450080FF58 /* DataController.swift in Sources */,
-				A25CB5232AFE557B0000A70F /* Trip+CoreDataProperties.swift in Sources */,
 				A212CCBA2AF91CF50080FF58 /* JournalView.swift in Sources */,
 				A25CB4B32AFC94770000A70F /* AddJournalView.swift in Sources */,
-				A25CB51D2AFE557B0000A70F /* Journal+CoreDataProperties.swift in Sources */,
-				A25CB51F2AFE557B0000A70F /* User+CoreDataProperties.swift in Sources */,
+				A21552922B02666F0006162B /* Journal+CoreDataProperties.swift in Sources */,
+				A21552962B02666F0006162B /* User+CoreDataProperties.swift in Sources */,
+				A21552942B02666F0006162B /* Trip+CoreDataProperties.swift in Sources */,
 				A212CCED2AF9A2AF0080FF58 /* AddTripView.swift in Sources */,
+				A21552952B02666F0006162B /* User+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

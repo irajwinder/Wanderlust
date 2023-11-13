@@ -94,7 +94,7 @@ class DataManager: NSObject {
     }
 
     
-    func saveTrip(user: User, tripName: String, tripStartDate: Date, tripEndDate: Date, tripCoverPhoto: Data) {
+    func saveTrip(user: User, tripName: String, tripStartDate: Date, tripEndDate: Date, tripCoverPhoto: String) {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
         // Create a new instance of the Trip entity in the context
@@ -116,7 +116,7 @@ class DataManager: NSObject {
         }
     }
     
-    func saveJournal(tripName: Trip, journalText: String, journalPhoto: Data, photoLatitude: Double, photoLongitude: Double, photoCaption: String, photoTag: String, photoTimeStamp: Date) {
+    func saveJournal(tripName: Trip, journalText: String, journalPhoto: String, photoLatitude: Double, photoLongitude: Double, photoTimeStamp: Date) {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
         // Create a new instance of the Journal entity in the context
@@ -127,8 +127,6 @@ class DataManager: NSObject {
         journal.journalPhoto = journalPhoto
         journal.photoLatitude = photoLatitude
         journal.photoLongitude = photoLongitude
-        journal.photoCaption = photoCaption
-        journal.photoTag = photoTag
         journal.photoTimeStamp = photoTimeStamp
         
         do {
@@ -141,13 +139,15 @@ class DataManager: NSObject {
         }
     }
     
-    func savePhoto(tripName: Trip, imageData: Data) {
+    func savePhoto(tripName: Trip, imageData: String, photoCaption: String, photoTag: String) {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
         // Create a new instance of the photoGallery entity in the context
-        let photoGallery = PhotoGallery(context: context)
+        let photoGallery = Photo(context: context)
         photoGallery.setValue(tripName, forKey: "trip")
         photoGallery.imageData = imageData
+        photoGallery.photoCaption = photoCaption
+        photoGallery.photoTag = photoTag
         
         do {
             // Attempting to save the changes made to the context

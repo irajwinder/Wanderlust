@@ -11,6 +11,7 @@ import SwiftUI
 import PhotosUI
 
 struct AddJournalView: View {
+    @ObservedObject var viewModel: JournalViewModel
     let selectedTrip: Trip?
     @Environment(\.dismiss) var dismiss
     
@@ -19,15 +20,14 @@ struct AddJournalView: View {
     @State private var photoTimeStamp = Date()
     @State private var photoLongitude: Double = 0.0
     @State private var photoLatitude: Double = 0.0
-    @State private var photoTag: String = ""
-    @State private var photoCaption: String = ""
     
+    @State private var journalPhoto: String?
     
     @State private var showAlert = false
     @State private var alert: Alert?
     
     @State private var selectedPickerImage: PhotosPickerItem?
-    @State private var journalPhoto: Image?
+    @State private var journalPhotoImage: Image?
     
     var body: some View {
         NavigationView {
@@ -37,30 +37,6 @@ struct AddJournalView: View {
                         HStack {
                             CustomText(text: "Journal Name", textSize: 20, textColor: .black)
                             CustomTextField(placeholder: "Journal Name", text: $journalText)
-                                .padding()
-                        }
-
-                        HStack {
-                            CustomText(text: "Photo Caption", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Photo Caption", text: $photoCaption)
-                                .padding()
-                        }
-                        
-                        HStack {
-                            CustomText(text: "Photo Tag", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Photo Tag", text: $photoTag)
-                                .padding()
-                        }
-                        
-                        HStack {
-                            CustomText(text: "Longitude", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Longitude", text: .constant(String(photoLongitude)))
-                                .padding()
-                        }
-                        
-                        HStack {
-                            CustomText(text: "Latitude", textSize: 20, textColor: .black)
-                            CustomTextField(placeholder: "Latitude", text: .constant(String(photoLatitude)))
                                 .padding()
                         }
                         
@@ -78,8 +54,11 @@ struct AddJournalView: View {
                             Task {
                                 if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
                                     if let uiImage = UIImage(data: data) {
-                                        journalPhoto = Image(uiImage: uiImage)
-                                        saveImageToFileManager(uiImage)
+                                        journalPhotoImage = Image(uiImage: uiImage)
+                                        // Save image to file manager and get the URL
+                                        if let imageURL = saveImageToFileManager(uiImage) {
+                                            journalPhoto = imageURL
+                                        }
                                         return
                                     }
                                 }
@@ -88,11 +67,23 @@ struct AddJournalView: View {
                         }
                         
                         VStack {
-                            if let journalPhoto {
-                                journalPhoto
+                            if let journalPhotoImage {
+                                journalPhotoImage
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 300, height: 300)
+                                
+                                HStack {
+                                    CustomText(text: "Longitude", textSize: 20, textColor: .black)
+                                    Spacer()
+                                    CustomText(text: String(photoLongitude), textSize: 20, textColor: .black)
+                                }
+                                
+                                HStack {
+                                    CustomText(text: "Latitude", textSize: 20, textColor: .black)
+                                    Spacer()
+                                    CustomText(text: String(photoLatitude), textSize: 20, textColor: .black)
+                                }
                             }
                         }
                     }
@@ -101,7 +92,7 @@ struct AddJournalView: View {
                 .toolbar {
                     ToolbarItem {
                         Button("Save", action: {
-                            validateJournal()
+                            SaveAndValidateJornal()
                         })
                     }
                 }.alert(isPresented: $showAlert) {
@@ -113,22 +104,10 @@ struct AddJournalView: View {
         
     }
     
-    func validateJournal() {
+    func SaveAndValidateJornal() {
         guard Validation.isValidName(journalText) else {
             showAlert = true
             alert = Validation.showAlert(title: "Error", message: "Invalid Journal Name")
-            return
-        }
-        
-        guard Validation.isValidName(photoCaption) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Caption")
-            return
-        }
-        
-        guard Validation.isValidName(photoTag) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Tag")
             return
         }
         
@@ -144,6 +123,12 @@ struct AddJournalView: View {
             return
         }
         
+        guard let journalPhoto = journalPhoto else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Please select a cover photo")
+            return
+        }
+        
         guard let selectedTrip = selectedTrip else {
             print("Could not fetch")
             return
@@ -153,11 +138,9 @@ struct AddJournalView: View {
         dataManagerInstance.saveJournal(
             tripName: selectedTrip,
             journalText: journalText,
-            journalPhoto: Data(),
+            journalPhoto: journalPhoto,
             photoLatitude: photoLatitude,
             photoLongitude: photoLongitude,
-            photoCaption: photoCaption,
-            photoTag: photoTag,
             photoTimeStamp: photoTimeStamp
 //            tripName: selectedTrip,
 //            journalText: journalText,
@@ -174,26 +157,42 @@ struct AddJournalView: View {
         
         // Dismiss the sheet after saving the trip
         dismiss()
+        
+        // Update the trips in the ViewModel
+        viewModel.fetchJournals()
     }
     
-    func saveImageToFileManager(_ uiImage: UIImage) {
-        if let imageData = uiImage.jpegData(compressionQuality: 0.5) {
+    func saveImageToFileManager(_ uiImage: UIImage) -> String? {
+        guard let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
+            return nil
+        }
+
+        let folderName = "JournalPicture"
+        let fileName = "\(journalText).jpg"
+        let relativeURL  = "\(folderName)/\(fileName)"
+
+        do {
+            // Get the documents directory URL
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMddHHmmss"
-            let dateString = formatter.string(from: Date())
-            let fileName = "profileImage_\(dateString).jpg"
-            let fileURL = documentsDirectory.appendingPathComponent(fileName)
-            do {
-                try imageData.write(to: fileURL)
-                print("Image saved at: \(fileURL)")
-            } catch {
-                print("Error saving image:", error.localizedDescription)
-            }
+            let fileURL = documentsDirectory.appendingPathComponent(relativeURL)
+
+            // Create the necessary directory structure if it doesn't exist
+            try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+            
+            // Write the image data to the file at the specified URL
+            try imageData.write(to: fileURL)
+            print("Image Location: \(fileURL)")
+            return relativeURL
+            
+        } catch {
+            // Print an error message if any issues occur during the image-saving process
+            print("Error saving image:", error.localizedDescription)
+            return nil
         }
     }
+
 }
 
 #Preview {
-    AddJournalView(selectedTrip: Trip())
+    AddJournalView(viewModel: JournalViewModel(), selectedTrip: Trip())
 }

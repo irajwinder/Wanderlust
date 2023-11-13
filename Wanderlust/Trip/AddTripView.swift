@@ -9,20 +9,20 @@ import SwiftUI
 import PhotosUI
 
 struct AddTripView: View {
+    @ObservedObject var viewModel: TripsViewModel
     @Environment(\.dismiss) var dismiss
     
     @State private var tripName: String = ""
     @State private var tripCoverPhoto: UIImage?
     @State private var tripStartDate = Date()
     @State private var tripEndDate = Date()
-    @State private var tripLongitude: Double = 0.0
-    @State private var tripLatitude: Double = 0.0
+    @State private var coverPhoto: String?
+    
+    @State private var selectedPickerImage: PhotosPickerItem?
+    @State private var coverPhotoImage: Image?
     
     @State private var showAlert = false
     @State private var alert: Alert?
-    
-    @State private var selectedPickerImage: PhotosPickerItem?
-    @State private var coverPhoto: Image?
     
     @AppStorage("loggedInUserID") var loggedInUserID: String?
     
@@ -63,8 +63,11 @@ struct AddTripView: View {
                             Task {
                                 if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
                                     if let uiImage = UIImage(data: data) {
-                                        coverPhoto = Image(uiImage: uiImage)
-                                        saveImageToFileManager(uiImage)
+                                        coverPhotoImage = Image(uiImage: uiImage)
+                                        // Save image to file manager and get the URL
+                                        if let imageURL = saveImageToFileManager(uiImage) {
+                                            coverPhoto = imageURL
+                                        }
                                         return
                                     }
                                 }
@@ -73,8 +76,8 @@ struct AddTripView: View {
                         }
                         
                         VStack {
-                            if let coverPhoto {
-                                coverPhoto
+                            if let coverPhotoImage {
+                                coverPhotoImage
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 300, height: 300)
@@ -86,23 +89,16 @@ struct AddTripView: View {
                 .toolbar {
                     ToolbarItem {
                         Button("Save", action: {
-                            validateTrip()
+                            SaveAndValidateTrip()
                         })
                     }
                 }.alert(isPresented: $showAlert) {
                     alert!
                 }
-        }
-        
+        }        
     }
     
-    func validateTrip() {
-        guard Validation.isValidName(tripName) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Trip Name")
-            return
-        }
-        
+    func SaveAndValidateTrip() {
         guard Validation.isValidName(tripName) else {
             showAlert = true
             alert = Validation.showAlert(title: "Error", message: "Invalid Trip Name")
@@ -121,12 +117,15 @@ struct AddTripView: View {
             return
         }
         
-        guard let loggedInUserID = loggedInUserID else {
-            print("Could not unwrap")
+        guard let coverPhoto = coverPhoto else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Please select a cover photo")
             return
         }
-        guard let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
-            print("Could not fetch")
+        
+        guard let loggedInUserID = loggedInUserID,
+              let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
+            print("Could not fetch user")
             return
         }
         
@@ -136,7 +135,7 @@ struct AddTripView: View {
             tripName: tripName,
             tripStartDate: tripStartDate,
             tripEndDate: tripEndDate,
-            tripCoverPhoto: Data()
+            tripCoverPhoto: coverPhoto
         )
         
         // Show a success alert
@@ -145,26 +144,40 @@ struct AddTripView: View {
         
         // Dismiss the sheet after saving the trip
         dismiss()
+        // Update the trips in the ViewModel
+        viewModel.fetchTrips()
     }
     
-    func saveImageToFileManager(_ uiImage: UIImage) {
-        if let imageData = uiImage.jpegData(compressionQuality: 0.5) {
+    func saveImageToFileManager(_ uiImage: UIImage) -> String? {
+        guard let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
+            return nil
+        }
+
+        let folderName = "CoverPicture"
+        let fileName = "\(tripName).jpg"
+        let relativeURL  = "\(folderName)/\(fileName)"
+
+        do {
+            // Get the documents directory URL
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMddHHmmss"
-            let dateString = formatter.string(from: Date())
-            let fileName = "profileImage_\(dateString).jpg"
-            let fileURL = documentsDirectory.appendingPathComponent(fileName)
-            do {
-                try imageData.write(to: fileURL)
-                print("Image saved at: \(fileURL)")
-            } catch {
-                print("Error saving image:", error.localizedDescription)
-            }
+            let fileURL = documentsDirectory.appendingPathComponent(relativeURL)
+
+            // Create the necessary directory structure if it doesn't exist
+            try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+            
+            // Write the image data to the file at the specified URL
+            try imageData.write(to: fileURL)
+            print("Image Location: \(fileURL)")
+            return relativeURL
+            
+        } catch {
+            // Print an error message if any issues occur during the image-saving process
+            print("Error saving image:", error.localizedDescription)
+            return nil
         }
     }
 }
 
 #Preview {
-    AddTripView()
+    AddTripView(viewModel: TripsViewModel())
 }

@@ -2,7 +2,7 @@
 //  Trip+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/10/23.
+//  Created by Rajwinder Singh on 11/13/23.
 //
 //
 
@@ -16,7 +16,7 @@ extension Trip {
         return NSFetchRequest<Trip>(entityName: "Trip")
     }
 
-    @NSManaged public var tripCoverPhoto: Data?
+    @NSManaged public var tripCoverPhoto: String?
     @NSManaged public var tripEndDate: Date?
     @NSManaged public var tripName: String?
     @NSManaged public var tripStartDate: Date?
@@ -47,10 +47,10 @@ extension Trip {
 extension Trip {
 
     @objc(addPhotoObject:)
-    @NSManaged public func addToPhoto(_ value: PhotoGallery)
+    @NSManaged public func addToPhoto(_ value: Photo)
 
     @objc(removePhotoObject:)
-    @NSManaged public func removeFromPhoto(_ value: PhotoGallery)
+    @NSManaged public func removeFromPhoto(_ value: Photo)
 
     @objc(addPhoto:)
     @NSManaged public func addToPhoto(_ values: NSSet)

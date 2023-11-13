@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/10/23.
+//  Created by Rajwinder Singh on 11/13/23.
 //
 //
 

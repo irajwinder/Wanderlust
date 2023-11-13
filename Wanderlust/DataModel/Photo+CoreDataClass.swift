@@ -1,5 +1,5 @@
 //
-//  User+CoreDataClass.swift
+//  Photo+CoreDataClass.swift
 //  Wanderlust
 //
 //  Created by Rajwinder Singh on 11/13/23.
@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 
-public class User: NSManagedObject {
+public class Photo: NSManagedObject {
 
 }

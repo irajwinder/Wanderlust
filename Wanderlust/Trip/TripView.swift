@@ -7,12 +7,32 @@
 
 import SwiftUI
 
+class TripsViewModel: ObservableObject {
+    @Published var trips: [Trip] = []
+    @AppStorage("loggedInUserID") var loggedInUserID: String?
+    
+    func fetchTrips() {
+        guard let loggedInUserID = loggedInUserID,
+              let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
+            print("Could not fetch user")
+            return
+        }
+       
+        guard let fetch = user.trip as? Set<Trip> else {
+            print("Could not fetch trips for the user")
+            return
+        }
+       
+        self.trips = Array(fetch)
+   }
+}
+
 struct TripView: View {
     @State private var tripCoverPicture: UIImage?
     @State private var isAddTripView = false
-    @AppStorage("loggedInUserID") var loggedInUserID: String?
     
-    @State var trips: [Trip] = []
+    
+    @StateObject private var viewModel = TripsViewModel()
     
    // @Environment(\.managedObjectContext) private var viewContext
 //    @FetchRequest(
@@ -23,7 +43,7 @@ struct TripView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(trips, id: \.self) { trip in
+                ForEach(viewModel.trips, id: \.self) { trip in
 //                    ForEach(trips.filter { $0.user?.userEmail == loggedInUserID }, id: \.self) { trip in
                     NavigationLink(destination: JournalView(selectedTrip: trip)) {
                         CustomCoverPhoto(coverPhoto: tripCoverPicture)
@@ -37,9 +57,11 @@ struct TripView: View {
                     }
                 }.onDelete { indexSet in
                     for index in indexSet {
-                        let trip = trips[index]
+                        let trip = viewModel.trips[index]
                         DataManager.sharedInstance.deleteEntity(trip)
+                        
                     }
+                    viewModel.fetchTrips()
                 }
             }.navigationTitle("Trips")
                 .toolbar {
@@ -53,10 +75,11 @@ struct TripView: View {
                 }
         
         }.sheet(isPresented: $isAddTripView) {
-            AddTripView()
+           // AddTripView()
+           AddTripView(viewModel: viewModel)
         }
         .onAppear(perform: {
-            fetchTrips()
+            viewModel.fetchTrips()
             let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
             print(paths[0])
         })
@@ -73,24 +96,6 @@ struct TripView: View {
         } else {
             return "N/A"
         }
-    }
-    
-     func fetchTrips() {
-         guard let loggedInUserID = loggedInUserID else {
-             print("Could not unwrap")
-             return
-         }
-         guard let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID) else {
-             print("Could not fetch")
-             return
-         }
-        
-         guard let fetch = user.trip as? Set<Trip> else {
-             print("Could not fetch trips for the user")
-             return
-         }
-        
-        self.trips = Array(fetch)
     }
 }
 
