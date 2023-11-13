@@ -12,7 +12,7 @@
 		A212CCBC2AF91D3E0080FF58 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCBB2AF91D3E0080FF58 /* MapView.swift */; };
 		A212CCBE2AF91D620080FF58 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCBD2AF91D620080FF58 /* PhotoView.swift */; };
 		A212CCC42AF91F6D0080FF58 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCC32AF91F6D0080FF58 /* TabBarView.swift */; };
-		A212CCEB2AF9A0450080FF58 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCEA2AF9A0450080FF58 /* DataController.swift */; };
+		A212CCEB2AF9A0450080FF58 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCEA2AF9A0450080FF58 /* LocationManager.swift */; };
 		A212CCED2AF9A2AF0080FF58 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212CCEC2AF9A2AF0080FF58 /* AddTripView.swift */; };
 		A21552912B02666F0006162B /* Journal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21552892B02666F0006162B /* Journal+CoreDataClass.swift */; };
 		A21552922B02666F0006162B /* Journal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215528A2B02666F0006162B /* Journal+CoreDataProperties.swift */; };
@@ -41,7 +41,7 @@
 		A212CCBB2AF91D3E0080FF58 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A212CCBD2AF91D620080FF58 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		A212CCC32AF91F6D0080FF58 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		A212CCEA2AF9A0450080FF58 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		A212CCEA2AF9A0450080FF58 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A212CCEC2AF9A2AF0080FF58 /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
 		A21552892B02666F0006162B /* Journal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A215528A2B02666F0006162B /* Journal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Journal+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				A2702D302AF52BDC002CDAF7 /* DataManager.swift */,
-				A212CCEA2AF9A0450080FF58 /* DataController.swift */,
+				A212CCEA2AF9A0450080FF58 /* LocationManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -301,7 +301,7 @@
 				A2702CF62AF3200D002CDAF7 /* WanderlustApp.swift in Sources */,
 				A2702D0D2AF3339B002CDAF7 /* Register.swift in Sources */,
 				A21552912B02666F0006162B /* Journal+CoreDataClass.swift in Sources */,
-				A212CCEB2AF9A0450080FF58 /* DataController.swift in Sources */,
+				A212CCEB2AF9A0450080FF58 /* LocationManager.swift in Sources */,
 				A212CCBA2AF91CF50080FF58 /* JournalView.swift in Sources */,
 				A25CB4B32AFC94770000A70F /* AddJournalView.swift in Sources */,
 				A21552922B02666F0006162B /* Journal+CoreDataProperties.swift in Sources */,
