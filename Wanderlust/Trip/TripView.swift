@@ -22,7 +22,6 @@ class TripsViewModel: ObservableObject {
             print("Could not fetch trips for the user")
             return
         }
-       
         self.trips = Array(fetch)
    }
 }
@@ -30,21 +29,12 @@ class TripsViewModel: ObservableObject {
 struct TripView: View {
     @State private var tripCoverPicture: UIImage?
     @State private var isAddTripView = false
-    
-    
     @StateObject private var viewModel = TripsViewModel()
-    
-   // @Environment(\.managedObjectContext) private var viewContext
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Trip.tripName, ascending: true)],
-//        animation: .default)
-//    private var trips: FetchedResults<Trip>
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(viewModel.trips, id: \.self) { trip in
-//                    ForEach(trips.filter { $0.user?.userEmail == loggedInUserID }, id: \.self) { trip in
                     NavigationLink(destination: JournalView(selectedTrip: trip)) {
                         CustomCoverPhoto(coverPhoto: tripCoverPicture)
                         VStack(alignment: .leading) {

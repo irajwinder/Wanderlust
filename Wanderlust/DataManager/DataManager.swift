@@ -111,18 +111,18 @@ class DataManager: NSObject {
         }
     }
     
-    func saveJournal(tripName: Trip, journalText: String, journalPhoto: String, photoLatitude: Double, photoLongitude: Double, photoTimeStamp: Date) {
+    func saveJournal(tripName: Trip, journalEntryText: String, journalEntryDate: Date, journalEntryPhoto: String, photoLatitude: Double, photoLongitude: Double) {
         // Access the view context from the persistent container
         let context = persistentContainer.viewContext
         // Create a new instance of the Journal entity in the context
         let journal = Journal(context: context)
         journal.setValue(tripName, forKey: "trip")
         
-        journal.journalText = journalText
-        journal.journalPhoto = journalPhoto
+        journal.journalEntryText = journalEntryText
+        journal.journalEntryDate = journalEntryDate
+        journal.journalEntryPhoto = journalEntryPhoto
         journal.photoLatitude = photoLatitude
         journal.photoLongitude = photoLongitude
-        journal.photoTimeStamp = photoTimeStamp
         
         do {
             // Attempting to save the changes made to the context

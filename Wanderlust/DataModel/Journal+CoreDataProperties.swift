@@ -16,11 +16,11 @@ extension Journal {
         return NSFetchRequest<Journal>(entityName: "Journal")
     }
 
-    @NSManaged public var journalPhoto: String?
-    @NSManaged public var journalText: String?
+    @NSManaged public var journalEntryPhoto: String?
+    @NSManaged public var journalEntryText: String?
     @NSManaged public var photoLatitude: Double
     @NSManaged public var photoLongitude: Double
-    @NSManaged public var photoTimeStamp: Date?
+    @NSManaged public var journalEntryDate: Date?
     @NSManaged public var trip: Trip?
 
 }

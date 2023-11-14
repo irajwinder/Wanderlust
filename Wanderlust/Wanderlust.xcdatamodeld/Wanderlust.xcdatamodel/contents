@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Journal" representedClassName=".Journal" syncable="YES">
-        <attribute name="journalPhoto" optional="YES" attributeType="String"/>
-        <attribute name="journalText" optional="YES" attributeType="String"/>
+        <attribute name="journalEntryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="journalEntryPhoto" optional="YES" attributeType="String"/>
+        <attribute name="journalEntryText" optional="YES" attributeType="String"/>
         <attribute name="photoLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="photoLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="photoTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="journal" inverseEntity="Trip"/>
     </entity>
     <entity name="Photo" representedClassName=".Photo" syncable="YES">

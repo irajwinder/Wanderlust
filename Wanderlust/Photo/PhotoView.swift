@@ -2,62 +2,62 @@
 //  PhotoView.swift
 //  Wanderlust
 //
-//  Created by Rajwinder Singh on 11/6/23.
+//  Created by Rajwinder Singh on 11/13/23.
 //
 
 import SwiftUI
 
+class PhotoViewModel: ObservableObject {
+    var selectedTrip: Trip?
+    @Published var photos: [Photo] = []
+    
+    func fetchPhotos() {
+        guard let fetch = selectedTrip?.photo as? Set<Photo> else {
+            print("Could not fetch photos for the trip")
+            return
+        }
+        self.photos = Array(fetch)
+    }
+}
+
 struct PhotoView: View {
     let selectedTrip: Trip?
-    @State private var photoTag: String = ""
-    @State private var photoCaption: String = ""
-    
-    @State private var showAlert = false
-    @State private var alert: Alert?
+    @State private var isAddPhotoView = false
+    @State private var galleryPicture: UIImage?
+    @StateObject private var viewModel = PhotoViewModel()
     
     var body: some View {
-        VStack {
-            Form {
-                Section(header: Text("Trip Photo(s)")) {
-                    HStack {
-                        CustomText(text: "Photo Caption", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "Photo Caption", text: $photoCaption)
-                            .padding()
+        List {
+            ForEach(viewModel.photos, id: \.self) { photo in
+                    CustomCoverPhoto(coverPhoto: galleryPicture)
+                    VStack(alignment: .leading) {
+                        Text(photo.photoCaption ?? "")
+                            .font(.headline)
+                        Text(photo.photoTag ?? "")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
-                    
-                    HStack {
-                        CustomText(text: "Photo Tag", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "Photo Tag", text: $photoTag)
-                            .padding()
-                    }
+            }.onDelete { indexSet in
+                for index in indexSet {
+                    let photo = viewModel.photos[index]
+                    DataManager.sharedInstance.deleteEntity(photo)
                 }
             }
-        }.navigationBarTitle("Add Photo")
+        }.navigationTitle("Gallery")
             .toolbar {
-                ToolbarItem {
-                    Button("Save", action: {
-                        SaveAndValidatePhoto()
-                    })
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isAddPhotoView = true
+                    }) {
+                        Label("Save", systemImage: "plus")
+                    }
                 }
-            }
-            .alert(isPresented: $showAlert) {
-                alert!
-            }
-        
-    }
-    
-    func SaveAndValidatePhoto() {
-        guard Validation.isValidName(photoCaption) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Caption")
-            return
-        }
-        
-        guard Validation.isValidName(photoTag) else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Tag")
-            return
-        }
+            }.sheet(isPresented: $isAddPhotoView) {
+                AddPhotoView(viewModel: viewModel, selectedTrip: selectedTrip)
+            }.onAppear(perform: {
+                viewModel.selectedTrip = selectedTrip
+                viewModel.fetchPhotos()
+            })
     }
 }
 

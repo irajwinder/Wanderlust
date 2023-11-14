@@ -17,8 +17,8 @@ extension Photo {
     }
 
     @NSManaged public var imageData: String?
-    @NSManaged public var photoTag: String?
     @NSManaged public var photoCaption: String?
+    @NSManaged public var photoTag: String?
     @NSManaged public var trip: Trip?
 
 }

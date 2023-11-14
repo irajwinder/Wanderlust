@@ -154,6 +154,8 @@ struct AddTripView: View {
         }
 
         let folderName = "CoverPicture"
+        
+        //UUID for trip and photo
         let fileName = "\(tripName).jpg"
         let relativeURL  = "\(folderName)/\(fileName)"
 
