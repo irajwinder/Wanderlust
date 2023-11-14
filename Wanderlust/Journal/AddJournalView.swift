@@ -44,7 +44,7 @@ struct AddJournalView: View {
                         }
                         
                         HStack {
-                            CustomText(text: "Journal Entry Date", textSize: 20, textColor: .black)
+                            CustomText(text: "Journal Date", textSize: 20, textColor: .black)
                             Spacer()
                             CustomDatePicker(selectedDate: $journalEntryDate)
                         }
