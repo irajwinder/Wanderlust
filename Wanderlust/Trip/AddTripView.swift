@@ -65,7 +65,7 @@ struct AddTripView: View {
                                     if let uiImage = UIImage(data: data) {
                                         coverPhotoImage = Image(uiImage: uiImage)
                                         // Save image to file manager and get the URL
-                                        if let imageURL = saveImageToFileManager(uiImage) {
+                                        if let imageURL = fileManagerClassInstance.saveImageToFileManager(uiImage, folderName: "CoverPicture", fileName: "\(UUID().uuidString).jpg") {
                                             coverPhoto = imageURL
                                         }
                                         return
@@ -148,36 +148,7 @@ struct AddTripView: View {
         viewModel.fetchTrips()
     }
     
-    func saveImageToFileManager(_ uiImage: UIImage) -> String? {
-        guard let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
-            return nil
-        }
-
-        let folderName = "CoverPicture"
-        
-        //UUID for trip and photo
-        let fileName = "\(tripName).jpg"
-        let relativeURL  = "\(folderName)/\(fileName)"
-
-        do {
-            // Get the documents directory URL
-            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let fileURL = documentsDirectory.appendingPathComponent(relativeURL)
-
-            // Create the necessary directory structure if it doesn't exist
-            try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
-            
-            // Write the image data to the file at the specified URL
-            try imageData.write(to: fileURL)
-            print("Image Location: \(fileURL)")
-            return relativeURL
-            
-        } catch {
-            // Print an error message if any issues occur during the image-saving process
-            print("Error saving image:", error.localizedDescription)
-            return nil
-        }
-    }
+   
 }
 
 #Preview {

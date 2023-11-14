@@ -65,7 +65,7 @@ struct AddJournalView: View {
                                     if let uiImage = UIImage(data: data) {
                                         journalPhotoImage = Image(uiImage: uiImage)
                                         // Save image to file manager and get the URL
-                                        if let imageURL = saveImageToFileManager(uiImage) {
+                                        if let imageURL = fileManagerClassInstance.saveImageToFileManager(uiImage, folderName: "JournalPicture", fileName: "\(UUID().uuidString).jpg") {
                                             journalEntryPhoto = imageURL
                                         }
                                         return
@@ -110,10 +110,8 @@ struct AddJournalView: View {
         } .onAppear(perform: {
             //On Appear
         })
-        
     }
 
-    
     func SaveAndValidateJornal() {
         guard Validation.isValidName(journalEntryText) else {
             showAlert = true
@@ -165,36 +163,6 @@ struct AddJournalView: View {
         // Update the trips in the ViewModel
         viewModel.fetchJournals()
     }
-    
-    func saveImageToFileManager(_ uiImage: UIImage) -> String? {
-        guard let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
-            return nil
-        }
-
-        let folderName = "JournalPicture"
-        let fileName = "\(journalEntryText).jpg"
-        let relativeURL  = "\(folderName)/\(fileName)"
-
-        do {
-            // Get the documents directory URL
-            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let fileURL = documentsDirectory.appendingPathComponent(relativeURL)
-
-            // Create the necessary directory structure if it doesn't exist
-            try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
-            
-            // Write the image data to the file at the specified URL
-            try imageData.write(to: fileURL)
-            print("Image Location: \(fileURL)")
-            return relativeURL
-            
-        } catch {
-            // Print an error message if any issues occur during the image-saving process
-            print("Error saving image:", error.localizedDescription)
-            return nil
-        }
-    }
-
 }
 
 #Preview {

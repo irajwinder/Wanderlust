@@ -27,16 +27,15 @@ class TripsViewModel: ObservableObject {
 }
 
 struct TripView: View {
-    @State private var tripCoverPicture: UIImage?
-    @State private var isAddTripView = false
     @StateObject private var viewModel = TripsViewModel()
+    @State private var isAddTripView = false
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(viewModel.trips, id: \.self) { trip in
                     NavigationLink(destination: JournalView(selectedTrip: trip)) {
-                        CustomCoverPhoto(coverPhoto: tripCoverPicture)
+                        CustomCoverPhoto(coverPhoto: loadPhoto(trips: trip))
                         VStack(alignment: .leading) {
                             Text(trip.tripName ?? "")
                                 .font(.headline)
@@ -73,7 +72,31 @@ struct TripView: View {
             let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
             print(paths[0])
         })
-       
+    }
+    
+    func loadPhoto(trips: Trip) -> UIImage {
+        guard let photoRelativePath = trips.tripCoverPhoto else {
+            print("Trip has no cover photo path")
+            return UIImage(systemName: "person") ?? UIImage()
+        }
+        
+        // Construct the local file URL by appending the relative path to the documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let localFileURL = documentsDirectory.appendingPathComponent(photoRelativePath)
+        
+        do {
+            // Read image data from the local file
+            let imageData = try Data(contentsOf: localFileURL)
+            if let uiImage = UIImage(data: imageData) {
+                return uiImage
+            } else {
+                print("Failed to create UIImage from data")
+                return UIImage(systemName: "person") ?? UIImage()
+            }
+        } catch {
+            print("Error loading image:", error.localizedDescription)
+            return UIImage(systemName: "person") ?? UIImage()
+        }
     }
     
     func dateToString(_ date: Date?) -> String {

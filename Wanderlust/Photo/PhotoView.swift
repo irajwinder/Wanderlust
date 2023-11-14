@@ -22,7 +22,6 @@ class PhotoViewModel: ObservableObject {
 struct PhotoView: View {
     let selectedTrip: Trip?
     @State private var isAddPhotoView = false
-    @State private var galleryPicture: UIImage?
     @StateObject private var viewModel = PhotoViewModel()
 
     var body: some View {
@@ -30,7 +29,7 @@ struct PhotoView: View {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 10) {
                     ForEach(viewModel.photos, id: \.self) { photo in
                         VStack {
-                            CustomCoverPhoto(coverPhoto: galleryPicture)
+                            CustomCoverPhoto(coverPhoto: loadPhoto(photos: photo))
                                 .onTapGesture {
                                     print(photo.photoCaption!)
                                 }
@@ -63,7 +62,31 @@ struct PhotoView: View {
                 viewModel.selectedTrip = selectedTrip
                 viewModel.fetchPhotos()
             }
+    }
+    
+    func loadPhoto(photos: Photo) -> UIImage {
+        guard let photoRelativePath = photos.imageData else {
+            print("Photos has no cover photo path")
+            return UIImage(systemName: "person") ?? UIImage()
+        }
         
+        // Construct the local file URL by appending the relative path to the documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let localFileURL = documentsDirectory.appendingPathComponent(photoRelativePath)
+        
+        do {
+            // Read image data from the local file
+            let imageData = try Data(contentsOf: localFileURL)
+            if let uiImage = UIImage(data: imageData) {
+                return uiImage
+            } else {
+                print("Failed to create UIImage from data")
+                return UIImage(systemName: "person") ?? UIImage()
+            }
+        } catch {
+            print("Error loading image:", error.localizedDescription)
+            return UIImage(systemName: "person") ?? UIImage()
+        }
     }
 }
 
