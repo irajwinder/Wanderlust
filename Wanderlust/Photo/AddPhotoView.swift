@@ -126,21 +126,21 @@ struct AddPhotoView: View {
     }
     
     func SaveAndValidatePhoto() {
+        guard !galleryPhotos.isEmpty else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Please select trip photos")
+            return
+        }
+        
         guard Validation.isValidName(photoCaption) else {
             showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Caption")
+            alert = Validation.showAlert(title: "Error", message: "Please add photos Caption")
             return
         }
         
         guard Validation.isValidName(photoTag) else {
             showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid Tag")
-            return
-        }
-        
-        guard !galleryPhotos.isEmpty else {
-            showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Please select trip photos")
+            alert = Validation.showAlert(title: "Error", message: "Please add photos Tag")
             return
         }
         
