@@ -27,99 +27,101 @@ struct AddPhotoView: View {
     @State private var galleryPhotos: [String] = []
     
     var body: some View {
-        VStack {
-            Form {
-                Section(header: Text("Trip Photo(s)")) {
-                    HStack {
-                        CustomText(text: "Trip Pictures", textSize: 20, textColor: .black)
-                        Spacer()
-                        
-                        PhotosPicker(
-                            "Select photo",
-                            selection: $selectedPickerImages,
-                            maxSelectionCount: 5,
-                            matching: .images
-                        )
-                        
-                    }.onChange(of: selectedPickerImages) { selectedItems in
-                        Task {
-                            for selectedItem in selectedItems {
-                                if let data = try? await selectedItem.loadTransferable(type: Data.self) {
-                                    if let uiImage = UIImage(data: data) {
-                                        let galleryImage = Image(uiImage: uiImage)
-                                        galleryPhotoImages.append(galleryImage)
-
-                                        // Save image to file manager and get the URL
-                                        if let imageURL = saveImageToFileManager(uiImage) {
-                                            galleryPhotos.append(imageURL)
+        NavigationView {
+            VStack {
+                Form {
+                    Section(header: Text("Trip Photo(s)")) {
+                        HStack {
+                            CustomText(text: "Trip Pictures", textSize: 20, textColor: .black)
+                            Spacer()
+                            
+                            PhotosPicker(
+                                "Select photo",
+                                selection: $selectedPickerImages,
+                                maxSelectionCount: 5,
+                                matching: .images
+                            )
+                            
+                        }.onChange(of: selectedPickerImages) { selectedItems in
+                            Task {
+                                for selectedItem in selectedItems {
+                                    if let data = try? await selectedItem.loadTransferable(type: Data.self) {
+                                        if let uiImage = UIImage(data: data) {
+                                            let galleryImage = Image(uiImage: uiImage)
+                                            galleryPhotoImages.append(galleryImage)
+                                            
+                                            // Save image to file manager and get the URL
+                                            if let imageURL = saveImageToFileManager(uiImage) {
+                                                galleryPhotos.append(imageURL)
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-
-                    LazyVGrid(columns: [
-                        GridItem(.adaptive(minimum: 100)),
-                        GridItem(.adaptive(minimum: 100))
-                    ]) {
-                        ForEach(galleryPhotoImages.indices, id: \.self) { index in
-                            galleryPhotoImages[index]
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
+                        
+                        LazyVGrid(columns: [
+                            GridItem(.adaptive(minimum: 100)),
+                            GridItem(.adaptive(minimum: 100))
+                        ]) {
+                            ForEach(galleryPhotoImages.indices, id: \.self) { index in
+                                galleryPhotoImages[index]
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 100)
+                            }
+                        }
+                        
+                        //                    .onChange(of: selectedPickerImage) {
+                        //                        Task {
+                        //                            if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
+                        //                                if let uiImage = UIImage(data: data) {
+                        //                                    galleryPhotoImages = Image(uiImage: uiImage)
+                        //                                    // Save image to file manager and get the URL
+                        //                                    if let imageURL = saveImageToFileManager(uiImage) {
+                        //                                        galleryPhoto = imageURL
+                        //                                    }
+                        //                                    return
+                        //                                }
+                        //                            }
+                        //                            print("Failed")
+                        //                        }
+                        //                    }
+                        
+                        //                    VStack {
+                        //                        if let galleryPhotoImage {
+                        //                            galleryPhotoImage
+                        //                                .resizable()
+                        //                                .scaledToFit()
+                        //                                .frame(width: 50, height: 50)
+                        //                        }
+                        //                    }
+                        
+                        HStack {
+                            CustomText(text: "Photo Caption", textSize: 20, textColor: .black)
+                            CustomTextField(placeholder: "Photo Caption", text: $photoCaption)
+                                .padding()
+                        }
+                        
+                        HStack {
+                            CustomText(text: "Photo Tag", textSize: 20, textColor: .black)
+                            CustomTextField(placeholder: "Photo Tag", text: $photoTag)
+                                .padding()
                         }
                     }
-                    
-//                    .onChange(of: selectedPickerImage) {
-//                        Task {
-//                            if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
-//                                if let uiImage = UIImage(data: data) {
-//                                    galleryPhotoImages = Image(uiImage: uiImage)
-//                                    // Save image to file manager and get the URL
-//                                    if let imageURL = saveImageToFileManager(uiImage) {
-//                                        galleryPhoto = imageURL
-//                                    }
-//                                    return
-//                                }
-//                            }
-//                            print("Failed")
-//                        }
-//                    }
-                    
-//                    VStack {
-//                        if let galleryPhotoImage {
-//                            galleryPhotoImage
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 50, height: 50)                            
-//                        }
-//                    }
-                    
-                    HStack {
-                        CustomText(text: "Photo Caption", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "Photo Caption", text: $photoCaption)
-                            .padding()
-                    }
-                    
-                    HStack {
-                        CustomText(text: "Photo Tag", textSize: 20, textColor: .black)
-                        CustomTextField(placeholder: "Photo Tag", text: $photoTag)
-                            .padding()
+                }
+            }.navigationBarTitle("Add Photo")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save", action: {
+                            SaveAndValidatePhoto()
+                        })
                     }
                 }
-            }
-        }.navigationBarTitle("Add Photo")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save", action: {
-                        SaveAndValidatePhoto()
-                    })
+                .alert(isPresented: $showAlert) {
+                    alert!
                 }
-            }
-            .alert(isPresented: $showAlert) {
-                alert!
-            }
+        }
         
     }
     
