@@ -22,7 +22,7 @@ class LocationManager: NSObject, ObservableObject {
         // Request authorization to use location services when the app is in use.
         self.locationManager.requestWhenInUseAuthorization()
         // Start updating the user's location.
-        //self.locationManager.startUpdatingLocation()
+        self.locationManager.startUpdatingLocation()
     }
 }
 
