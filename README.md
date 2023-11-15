@@ -25,7 +25,6 @@ WanderLust is a travel journal app designed to enhance the user's experience and
 
 - **Daily Journaling**: Create journal entries for each day or specific events during your trip.
 - **Text, Photos, and Geolocation**: Capture the essence of your experiences with text, photos, and geolocation data.
-- **Edit and Update**: Modify and update your journal entries as your trip unfolds.
 
 ### Photo Gallery
 
@@ -37,14 +36,6 @@ WanderLust is a travel journal app designed to enhance the user's experience and
 
 - **Interactive Maps**: Integrate maps to showcase your route and visited locations.
 - **Location Tracking**: Automatically log your current location during the trip, making it easier to remember the places you've been.
-
-### Searching of Trips
-
-- **Efficient Search**: Quickly find your past trips by using the search functionality.
-
-### Sharing and Social Integration
-
-- **Social Sharing**: Share your journal entries or photos on popular social media platforms, allowing your friends and family to follow your adventures.
 
 ## Technologies Used
 
