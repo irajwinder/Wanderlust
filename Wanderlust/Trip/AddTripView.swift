@@ -136,13 +136,16 @@ struct AddTripView: View {
         }        
     }
     
-    //Download and save the image
+    //download and save an image from the given URL
     func downloadAndSaveImage(url: URL) {
+        // Create a data task using URLSession to fetch data from the given URL
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            // Check if there is valid data and convert it to a UIImage
             if let data = data, let uiImage = UIImage(data: data) {
                 // Save image to file manager and get the URL
                 if let imageURL = fileManagerClassInstance.saveImageToFileManager(uiImage, folderName: "CoverPicture", fileName: "\(UUID().uuidString).jpg") {
                     DispatchQueue.main.async {
+                        // Update the coverPhoto property on the main thread
                         coverPhoto = imageURL
                     }
                 }
@@ -150,6 +153,7 @@ struct AddTripView: View {
                 print("Error downloading image: \(error)")
             }
         }
+        // Resume the data task to initiate the download
         task.resume()
     }
 

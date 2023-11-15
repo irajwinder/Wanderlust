@@ -9,9 +9,7 @@ import SwiftUI
 
 @main
 struct WanderlustApp: App {
-    //@StateObject private var dataController = DataController()
     @AppStorage("isLoggedIn") var isLoggedIn = true
-  
     
     var body: some Scene {
         WindowGroup {
@@ -20,8 +18,6 @@ struct WanderlustApp: App {
             } else {
                 Register()
             }
-                //.environment(\.managedObjectContext, dataController.container.viewContext)
-                    //.environmentObject()
         }
     }
 }
