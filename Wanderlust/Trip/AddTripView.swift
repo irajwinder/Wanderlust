@@ -86,9 +86,15 @@ struct AddTripView: View {
                                 }
                             }
                         } else {
-                            TextField("Enter Image URL", text: $imageURL)
-                                .padding()
-                            
+                            HStack {
+                                TextField("Enter Image URL", text: $imageURL)
+                                    .padding()
+                                
+                                Button("Download") {
+                                    ValidateAndSaveRemotePhoto()
+                                }
+                            }
+
                             if let url = URL(string: imageURL) {
                                     AsyncImage(url: url) { phase in
                                         switch phase {
@@ -97,10 +103,6 @@ struct AddTripView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 300, height: 300)
-                                                .onAppear {
-                                                    // Perform asynchronous image loading and save to file manager
-                                                    downloadAndSaveImage(url: url)
-                                                }
                                         case .failure:
                                             Text("There was an error loading the image")
                                         case .empty:
@@ -110,7 +112,6 @@ struct AddTripView: View {
                                         }
                                     }.frame(width: 300, height: 300)
                                 }
-
                         }
                         
                         VStack {
@@ -155,6 +156,20 @@ struct AddTripView: View {
         }
         // Resume the data task to initiate the download
         task.resume()
+    }
+    
+    func ValidateAndSaveRemotePhoto() {
+        guard Validation.isValidName(imageURL) else {
+            showAlert = true
+            alert = Validation.showAlert(title: "Error", message: "Please enter Image URL")
+            return
+        }
+        
+        guard let url = URL(string: imageURL) else {
+            print("Invalid URL")
+            return
+        }
+        downloadAndSaveImage(url: url)
     }
 
     func SaveAndValidateTrip() {
