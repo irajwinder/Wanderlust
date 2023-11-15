@@ -9,22 +9,19 @@ import SwiftUI
 import PhotosUI
 
 struct AddPhotoView: View {
+    let selectedTrip: Trip?
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: PhotoViewModel
-    let selectedTrip: Trip?
-   // @State private var galleryPhoto: String?
+    
+    @State private var galleryPhotos: [String] = []
     @State private var photoTag: String = ""
     @State private var photoCaption: String = ""
     
-    @State private var showAlert = false
-    @State private var alert: Alert?
-    
-//    @State private var selectedPickerImage: PhotosPickerItem?
-//    @State private var galleryPhotoImage: Image?
-    
     @State private var selectedPickerImages: [PhotosPickerItem] = []
     @State private var galleryPhotoImages: [Image] = []
-    @State private var galleryPhotos: [String] = []
+    
+    @State private var showAlert = false
+    @State private var alert: Alert?
     
     var body: some View {
         NavigationView {
@@ -70,31 +67,6 @@ struct AddPhotoView: View {
                                     .frame(width: 100, height: 100)
                             }
                         }
-                        
-                        //                    .onChange(of: selectedPickerImage) {
-                        //                        Task {
-                        //                            if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
-                        //                                if let uiImage = UIImage(data: data) {
-                        //                                    galleryPhotoImages = Image(uiImage: uiImage)
-                        //                                    // Save image to file manager and get the URL
-                        //                                    if let imageURL = saveImageToFileManager(uiImage) {
-                        //                                        galleryPhoto = imageURL
-                        //                                    }
-                        //                                    return
-                        //                                }
-                        //                            }
-                        //                            print("Failed")
-                        //                        }
-                        //                    }
-                        
-                        //                    VStack {
-                        //                        if let galleryPhotoImage {
-                        //                            galleryPhotoImage
-                        //                                .resizable()
-                        //                                .scaledToFit()
-                        //                                .frame(width: 50, height: 50)
-                        //                        }
-                        //                    }
                         
                         HStack {
                             CustomText(text: "Photo Caption", textSize: 20, textColor: .black)
@@ -166,10 +138,9 @@ struct AddPhotoView: View {
         
         // Update the trips in the ViewModel
         viewModel.fetchPhotos()
-
     }
 }
 
 #Preview {
-    AddPhotoView(viewModel: PhotoViewModel(), selectedTrip: Trip())
+    AddPhotoView(selectedTrip: Trip(), viewModel: PhotoViewModel())
 }

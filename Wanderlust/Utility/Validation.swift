@@ -24,28 +24,14 @@ struct Validation {
     }
     
     static func isValidPassword(_ password: String?) -> Bool {
-            guard let password = password, password.count >= 8 else {
-                return false
-            }
-            return true
-        }
-
-    static func doPasswordsMatch(_ password: String?, _ confirmPassword: String?) -> Bool {
-        guard let password = password, let confirmPassword = confirmPassword, password == confirmPassword else {
+        guard let password = password, password.count >= 8 else {
             return false
         }
         return true
     }
-    
-    static func isValidLongitude(_ longitude: Double?) -> Bool {
-            guard let longitude = longitude, (longitude >= -180 && longitude <= 180) else {
-                return false
-            }
-            return true
-        }
 
-    static func isValidLatitude(_ latitude: Double?) -> Bool {
-        guard let latitude = latitude, (latitude >= -90 && latitude <= 90) else {
+    static func doPasswordsMatch(_ password: String?, _ confirmPassword: String?) -> Bool {
+        guard let password = password, let confirmPassword = confirmPassword, password == confirmPassword else {
             return false
         }
         return true
@@ -65,5 +51,17 @@ struct Validation {
 
     static func showAlert(title: String, message: String) -> Alert {
         return Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK")))
+    }
+    
+    static func dateToString(_ date: Date?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        
+        if let startDate = date {
+            return dateFormatter.string(from: startDate)
+        } else {
+            return "N/A"
+        }
     }
 }

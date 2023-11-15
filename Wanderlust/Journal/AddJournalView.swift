@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import PhotosUI
 
 struct AddJournalView: View {
+    let selectedTrip: Trip?
     @ObservedObject var viewModel: JournalViewModel
     @ObservedObject var locationManager = LocationManager()
-    
-    let selectedTrip: Trip?
     @Environment(\.dismiss) var dismiss
     
     @State private var journalEntryText: String = ""
@@ -22,14 +19,13 @@ struct AddJournalView: View {
     @State private var journalEntryDate = Date()
     @State private var photoLongitude: Double = 0.0
     @State private var photoLatitude: Double = 0.0
-    
     @State private var journalEntryPhoto: String?
-    
-    @State private var showAlert = false
-    @State private var alert: Alert?
     
     @State private var selectedPickerImage: PhotosPickerItem?
     @State private var journalPhotoImage: Image?
+    
+    @State private var showAlert = false
+    @State private var alert: Alert?
     
     
     var body: some View {
@@ -58,7 +54,6 @@ struct AddJournalView: View {
                                 selection: $selectedPickerImage,
                                 matching: .images
                             )
-                            
                         }.onChange(of: selectedPickerImage) {
                             Task {
                                 if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
@@ -107,9 +102,7 @@ struct AddJournalView: View {
                 }.alert(isPresented: $showAlert) {
                     alert!
                 }
-        } .onAppear(perform: {
-            //On Appear
-        })
+        }
     }
 
     func SaveAndValidateJornal() {
@@ -166,5 +159,5 @@ struct AddJournalView: View {
 }
 
 #Preview {
-    AddJournalView(viewModel: JournalViewModel(), selectedTrip: Trip())
+    AddJournalView(selectedTrip: Trip(), viewModel: JournalViewModel())
 }

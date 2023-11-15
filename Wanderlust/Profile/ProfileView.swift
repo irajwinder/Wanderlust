@@ -100,11 +100,11 @@ struct ProfileView: View {
                 isLoggedIn = false
             })
         }.onAppear(perform: {
-            fetch()
+            fetchUserDetails()
         })
     }
     
-    func fetch() {
+    func fetchUserDetails() {
         guard let loggedInUserID = loggedInUserID,
               let user = dataManagerInstance.fetchUser(userEmail: loggedInUserID),
               let profilePictureRelativePath = user.userProfilePhoto else {
@@ -116,19 +116,7 @@ struct ProfileView: View {
         userEmail = user.userEmail ?? ""
         userDOB = user.userDateOfBirth ?? Date()
         
-        // Construct the local file URL by appending the relative path to the documents directory
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let localFileURL = documentsDirectory.appendingPathComponent(profilePictureRelativePath)
-
-        Task {
-            do {
-                // Read image data from the local file
-                let imageData = try Data(contentsOf: localFileURL)
-                userProfilePicture = UIImage(data: imageData)
-            } catch {
-                print("Error loading image:", error.localizedDescription)
-            }
-        }
+        userProfilePicture = fileManagerClassInstance.loadImageFromFileManager(relativePath: profilePictureRelativePath)
     }
     
     func saveProfile() {
@@ -148,7 +136,7 @@ struct ProfileView: View {
             profilePicticture: profilePicture
         )
         
-        fetch()
+        fetchUserDetails()
         profilePhotoImage = nil
     }
 }

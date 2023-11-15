@@ -5,8 +5,6 @@
 //  Created by Rajwinder Singh on 11/6/23.
 //
 
-import Foundation
-import CoreData
 import CoreLocation
 
 class LocationManager: NSObject, ObservableObject {

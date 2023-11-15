@@ -47,6 +47,26 @@ class FileManagerClass: NSObject {
         }
     }
     
+    func loadImageFromFileManager(relativePath: String) -> UIImage {
+        // Construct the local file URL by appending the relative path to the documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let localFileURL = documentsDirectory.appendingPathComponent(relativePath)
+        
+        do {
+            // Read image data from the local file
+            let imageData = try Data(contentsOf: localFileURL)
+            if let uiImage = UIImage(data: imageData) {
+                return uiImage
+            } else {
+                print("Failed to create UIImage from data")
+                return UIImage(systemName: "person") ?? UIImage()
+            }
+        } catch {
+            print("Error loading image:", error.localizedDescription)
+            return UIImage(systemName: "person") ?? UIImage()
+        }
+    }
+    
 }
 
 let fileManagerClassInstance = FileManagerClass.sharedInstance

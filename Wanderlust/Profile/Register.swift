@@ -130,9 +130,9 @@ struct RegisterView: View {
     }
     
     func validateUser() {
-        guard Validation.isValidEmail(email) else {
+        guard Validation.isValidEmail(email), dataManagerInstance.fetchUser(userEmail: email) == nil else {
             showAlert = true
-            alert = Validation.showAlert(title: "Error", message: "Invalid email address")
+            alert = Validation.showAlert(title: "Error", message: "Invalid email or already exists")
             return
         }
         

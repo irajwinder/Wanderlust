@@ -26,6 +26,9 @@ struct AddTripView: View {
     
     @AppStorage("loggedInUserID") var loggedInUserID: String?
     
+    @State private var isSelectingFromGallery = true
+    @State private var imageURL: String = ""
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -53,26 +56,61 @@ struct AddTripView: View {
                             CustomText(text: "Cover Picture", textSize: 20, textColor: .black)
                             Spacer()
                             
+                            Picker("Source", selection: $isSelectingFromGallery) {
+                                Text("Gallery").tag(true)
+                                Text("URL").tag(false)
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                            .padding()
+                        }
+
+                        if isSelectingFromGallery {
                             PhotosPicker(
                                 "Select photo",
                                 selection: $selectedPickerImage,
                                 matching: .images
                             )
-                            
-                        }.onChange(of: selectedPickerImage) {
-                            Task {
-                                if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
-                                    if let uiImage = UIImage(data: data) {
-                                        coverPhotoImage = Image(uiImage: uiImage)
-                                        // Save image to file manager and get the URL
-                                        if let imageURL = fileManagerClassInstance.saveImageToFileManager(uiImage, folderName: "CoverPicture", fileName: "\(UUID().uuidString).jpg") {
-                                            coverPhoto = imageURL
+                            .onChange(of: selectedPickerImage) {
+                                Task {
+                                    if let data = try? await selectedPickerImage?.loadTransferable(type: Data.self) {
+                                        if let uiImage = UIImage(data: data) {
+                                            coverPhotoImage = Image(uiImage: uiImage)
+                                            // Save image to file manager and get the URL
+                                            if let imageURL = fileManagerClassInstance.saveImageToFileManager(uiImage, folderName: "CoverPicture", fileName: "\(UUID().uuidString).jpg") {
+                                                coverPhoto = imageURL
+                                            }
+                                            return
                                         }
-                                        return
                                     }
+                                    print("Failed")
                                 }
-                                print("Failed")
                             }
+                        } else {
+                            TextField("Enter Image URL", text: $imageURL)
+                                .padding()
+                            
+                            if let url = URL(string: imageURL) {
+                                    AsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 300, height: 300)
+                                                .onAppear {
+                                                    // Perform asynchronous image loading and save to file manager
+                                                    downloadAndSaveImage(url: url)
+                                                }
+                                        case .failure:
+                                            Text("There was an error loading the image")
+                                        case .empty:
+                                            ProgressView()
+                                        @unknown default:
+                                            Text("Unknow Error")
+                                        }
+                                    }.frame(width: 300, height: 300)
+                                }
+
                         }
                         
                         VStack {
@@ -98,6 +136,23 @@ struct AddTripView: View {
         }        
     }
     
+    //Download and save the image
+    func downloadAndSaveImage(url: URL) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let uiImage = UIImage(data: data) {
+                // Save image to file manager and get the URL
+                if let imageURL = fileManagerClassInstance.saveImageToFileManager(uiImage, folderName: "CoverPicture", fileName: "\(UUID().uuidString).jpg") {
+                    DispatchQueue.main.async {
+                        coverPhoto = imageURL
+                    }
+                }
+            } else if let error = error {
+                print("Error downloading image: \(error)")
+            }
+        }
+        task.resume()
+    }
+
     func SaveAndValidateTrip() {
         guard Validation.isValidName(tripName) else {
             showAlert = true
@@ -147,8 +202,6 @@ struct AddTripView: View {
         // Update the trips in the ViewModel
         viewModel.fetchTrips()
     }
-    
-   
 }
 
 #Preview {

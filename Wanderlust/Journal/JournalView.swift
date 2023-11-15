@@ -29,11 +29,11 @@ struct JournalView: View {
             List {
                 ForEach(viewModel.journals, id: \.self) { journal in
                     NavigationLink(destination: PhotoView(selectedTrip: selectedTrip)) {
-                        CustomCoverPhoto(coverPhoto: loadPhoto(journals: journal))
+                        CustomCoverPhoto(coverPhoto: fileManagerClassInstance.loadImageFromFileManager(relativePath: journal.journalEntryPhoto ?? ""))
                         VStack(alignment: .leading) {
                             Text(journal.journalEntryText ?? "")
                                 .font(.headline)
-                            Text("\(dateToString(journal.journalEntryDate))")
+                            Text("\(Validation.dateToString(journal.journalEntryDate))")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             Text("\(journal.photoLongitude), \(journal.photoLatitude)")
@@ -57,48 +57,11 @@ struct JournalView: View {
                         }
                     }
                 }.sheet(isPresented: $isAddJournalView) {
-                    AddJournalView(viewModel: viewModel, selectedTrip: selectedTrip)
+                    AddJournalView(selectedTrip: selectedTrip, viewModel: viewModel)
         }.onAppear(perform: {
             viewModel.selectedTrip = selectedTrip
             viewModel.fetchJournals()
         })
-    }
-    
-    func loadPhoto(journals: Journal) -> UIImage {
-        guard let photoRelativePath = journals.journalEntryPhoto else {
-            print("Journal has no cover photo path")
-            return UIImage(systemName: "person") ?? UIImage()
-        }
-        
-        // Construct the local file URL by appending the relative path to the documents directory
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let localFileURL = documentsDirectory.appendingPathComponent(photoRelativePath)
-        
-        do {
-            // Read image data from the local file
-            let imageData = try Data(contentsOf: localFileURL)
-            if let uiImage = UIImage(data: imageData) {
-                return uiImage
-            } else {
-                print("Failed to create UIImage from data")
-                return UIImage(systemName: "person") ?? UIImage()
-            }
-        } catch {
-            print("Error loading image:", error.localizedDescription)
-            return UIImage(systemName: "person") ?? UIImage()
-        }
-    }
-    
-    func dateToString(_ date: Date?) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        
-        if let startDate = date {
-            return dateFormatter.string(from: startDate)
-        } else {
-            return "N/A"
-        }
     }
 }
 
